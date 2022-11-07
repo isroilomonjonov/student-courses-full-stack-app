@@ -97,15 +97,10 @@ const AddEditCourse = () => {
         />
         {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
 
-        <button className="btnLogin">Update Accaunt</button>
+        <button className="button-23">Update Accaunt</button>
       </form>
       <button
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          border: "none",
-          color: "white",
-        }}
+         className="button-64"
         onClick={() => navigate(-1)}
       >
         ◀

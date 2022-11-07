@@ -56,15 +56,10 @@ const AddEditCourse = () => {
           })}
         />
         {errors.description && <p>{errors.description.message}</p>}
-        <button className="btnLogin">{isUpdate ? "Update" : "Create"}</button>
+        <button className="button-23">{isUpdate ? "Update" : "Create"}</button>
       </form>
       <button
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          border: "none",
-          color: "white",
-        }}
+         className="button-64"
         onClick={() => navigate(-1)}
       >
         ◀

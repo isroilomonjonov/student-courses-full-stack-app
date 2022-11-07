@@ -54,14 +54,14 @@ function Courses() {
   };
   const courseCols = [
     {
-      Header: "Name",
+      Header: "Nomi",
       accessor: (item) => (
         <Link to={`/students?course_id=${item.id}`}>{item.name}</Link>
       ),
     },
-    { Header: "Description", accessor: "description" },
+    { Header: "Tavsifi", accessor: "description" },
     {
-      Header: "Actions",
+      Header: "Amallar",
       accessor: (course) => {
         return (
           <div>
@@ -86,21 +86,23 @@ function Courses() {
     setValue(e.target.value);
   };
   return (
-    <Layout title="Courses">
-      <Link className="btn-link" to="/courses/new">
-        Add course
-      </Link>
-      <input
+    <Layout title="Courses">  <input
+    className="search"
         type="text"
         value={value}
         placeholder="seach"
         onChange={changeHandler}
       />
       <br/>
-<button style={{color: fields?.includes("name")?"red":""}} onClick={()=>fieldSetter(page,size,search,fields,sort,"name")}>Name</button>
-<button style={{padding:"5px",color:sort===name||sort===`-${name}`?"red":""}} onClick={()=>sortSetter(name,setName,"name")}>{name==="-"?"desc":"asc"}</button>
-<button  style={{color: fields?.includes("description")?"red":""}} onClick={()=>fieldSetter(page,size,search,fields,sort,"description")}>Description</button>
-<button style={{padding:"5px",color:sort===name||sort===`-${name}`?"red":""}}  onClick={()=>sortSetter(description,setDescription,"description")}>{description==="-"?"desc":"asc"}</button>
+      <Link className="btn-link" to="/courses/new">
+       Kurs Yaratmoq
+      </Link>
+    
+      <br/>
+<button className="button-23"style={{color: fields?.includes("name")?"red":""}} onClick={()=>fieldSetter(page,size,search,fields,sort,"name")}>Nomi</button>
+<button className="button-23" style={{color:sort===name||sort===`-${name}`?"red":""}} onClick={()=>sortSetter(name,setName,"name")}>{name==="-"?"desc":"asc"}</button>
+<button className="button-23" style={{color: fields?.includes("description")?"red":""}} onClick={()=>fieldSetter(page,size,search,fields,sort,"description")}>Tavsif</button>
+<button className="button-23" style={{color:sort===name||sort===`-${name}`?"red":""}}  onClick={()=>sortSetter(description,setDescription,"description")}>{description==="-"?"desc":"asc"}</button>
       {loading && "Loading..."}
       {!loading && error && error}
       {data && data.courses ? (
@@ -123,12 +125,7 @@ function Courses() {
       <br />
 
       <button
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          border: "none",
-          color: "white",
-        }}
+       className="button-64"
         onClick={() => navigate(-1)}
       >
         ◀

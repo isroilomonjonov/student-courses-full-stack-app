@@ -68,12 +68,12 @@ function Students() {
     //              </div>
     //   ),
     // },
-    { Header: "First Name", accessor: "firstName" },
-    { Header: "Last Name", accessor: "lastName" },
-    { Header: "Birthdate", accessor: "birthDay" },
+    { Header: "Ismi", accessor: "firstName" },
+    { Header: "Familiyasi", accessor: "lastName" },
+    { Header: "Tug'ilgan vaqti", accessor: "birthDay" },
     {
-      id: "actions",
-      Header: "Actions",
+      id: "Amallar",
+      Header: "Amallar",
       accessor: (student) => (
         <div>
           <Link to={`/students/${student.id}`}>📝</Link>
@@ -91,10 +91,18 @@ function Students() {
     setValue(e.target.value);
   };
   return (
-    <Layout title="Students">
+    <Layout title="Students">  <input
+    className="search"
+
+        type="text"
+        value={value}
+        placeholder="seach"
+        onChange={changeHandler}
+      />
+      <br/>
       {!courseId && (
         <Link className="btn-link" to="/students/new">
-          Add Student
+        Talaba Yaratmoq
         </Link>
       )}
       {/* <form style={{margin: "20px"}} onSubmit={handleSubmit((data) =>navigate(`/students?search=${data.search}`))} >
@@ -103,15 +111,10 @@ function Students() {
           })}/>
           <button>Search</button>
         </form>   */}
-      <input
-        type="text"
-        value={value}
-        placeholder="seach"
-        onChange={changeHandler}
-      />
+    
       {courseId && (
         <Link className="btn-link" to={`/students/new?courseId=${courseId}`}>
-          Add Student by Course Id
+         Kusr nomi bo'yicha Talaba qo'shish
         </Link>
       )}
       {getStudentsLodaing && "Loading"}
@@ -136,12 +139,7 @@ function Students() {
 
       <br />
       <button
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          border: "none",
-          color: "white",
-        }}
+          className="button-64"
         onClick={() => navigate(-1)}
       >
         ◀

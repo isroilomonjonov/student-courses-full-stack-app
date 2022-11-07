@@ -39,13 +39,13 @@ function Users() {
     navigate(`/users?page=1&size=${size || 2}`);
   };
   const usersCols = [
-    { Header: "First Name", accessor: "firstName" },
-    { Header: "Last Name", accessor: "lastName" },
-    { Header: "User Name", accessor: "username" },
+    { Header: "Ismi", accessor: "firstName" },
+    { Header: "Familiyasi", accessor: "lastName" },
+    { Header: "Login", accessor: "username" },
     { Header: "Email", accessor: "email" },
     { Header: "Role", accessor: "role" },
     {
-      id: "actions",
+      id: "Amallar",
       Header: "Actions",
       accessor: (User) => (
         <div>
@@ -63,31 +63,34 @@ function Users() {
   return (
     <Layout title="Users">
       <input
+    className="search"
+
         type="text"
         value={value}
         placeholder="search"
         onChange={changeHandler}
       />
+      <br/>
       <Link
         style={{ color: active !== "true" && active !== "false" ? "red" : "" }}
         className="btn-link"
         to={"/users"}
       >
-        All
+        Hammasi
       </Link>
       <Link
         style={{ color: active === "true" ? "red" : "" }}
         className="btn-link"
         to={"/users?active=true"}
       >
-        Active
+        Aktivlar
       </Link>
       <Link
         style={{ color: active === "false" ? "red" : "" }}
         className="btn-link"
         to={"/users?active=false"}
       >
-        Not Active
+       Aktiv emaslar
       </Link>
       {getUsersData && getUsersData.users ? (
         <BasicTable columns={usersCols} data={getUsersData.users} />
@@ -107,12 +110,7 @@ function Users() {
 
       <br />
       <button
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          border: "none",
-          color: "white",
-        }}
+           className="button-64"
         onClick={() => navigate(-1)}
       >
         ◀

@@ -12,27 +12,27 @@ const Home = () => {
     setIsAuth(false);
     navigate("/login");
   };
-  const token = localStorage.getItem("token");
   return (
     isAuth && (
-      <div className="links">
+      <div>
         <Navbar title="Home" />
         <h1>Hello {user?.username}</h1>
+        <div className="links">
         <Link className="btn-link" to="/courses">
-          Courses
+          Kurslar
         </Link>
         <Link className="btn-link" to="/students">
-          Students
+          Talabalar
         </Link>
         {user?.role === "SuperAdmin" && (
           <Link className="btn-link" to="/users">
-            Users
+            Foydalanuvchilar
           </Link>
         )}
         <Link className="btn-link" to={`/users/${user?.id}`}>
-          Update Accaunt
+          Foydalanuvchi Malumotlarni Yangilamoq
         </Link>
-        <button onClick={removed}>Log Out</button>
+        <button className="button-70"onClick={removed}>Log Out</button></div>
       </div>
     )
   );

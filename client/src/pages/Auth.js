@@ -75,7 +75,7 @@ const Auth = (props) => {
             id="text"
             className="input"
             type="text"
-            placeholder="firstName"
+            placeholder="Ismingiz"
             {...register("firstName", {
               required: { value: true, message: "FirstName kiriting" },
             })}
@@ -86,7 +86,7 @@ const Auth = (props) => {
             id="text"
             className="input"
             type="text"
-            placeholder="lastName"
+            placeholder="Familiyangiz"
             {...register("lastName", {
               required: { value: true, message: "LastName kiriting" },
             })}
@@ -97,7 +97,7 @@ const Auth = (props) => {
             id="text"
             className="input"
             type="text"
-            placeholder="username"
+            placeholder="Login"
             {...register("username", {
               required: { value: true, message: "Username kiriting" },
               validate:value=>value===value.toLowerCase()||"Faqat Kichik Harf Kiritish Mumkin"
@@ -109,7 +109,7 @@ const Auth = (props) => {
             id="password"
             className="input"
             type="password"
-            placeholder="password"
+            placeholder="Parol"
             {...register("password", {
               required: { value: true, message: "Password kiriting" },
             })}
@@ -120,7 +120,7 @@ const Auth = (props) => {
             id="email"
             className="input"
             type="email"
-            placeholder="email"
+            placeholder="Email"
             {...register("email", {
               required: { value: true, message: "Email kiriting" },
             })}
@@ -131,21 +131,20 @@ const Auth = (props) => {
             id="phoneNumber"
             className="input"
             type="number"
-            placeholder="PhoneNumber"
+            placeholder="Telefon raqamingiz"
             {...register("phoneNumber", {
               required: { value: true, message: "PhoneNumber kiriting" },
-            //  validate:value=>regex1.match(value) 
             })}
             
           />
           {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
-          <button className="btnLogin">Create Accaunt</button>
+          <button className="button-9">Create Accaunt</button>
           <button
+          className="button-9"
             type="button"
             onClick={() => {
               navigate("/login");
             }}
-            className="btnLogin"
           >
             I Have Accaunt
           </button>

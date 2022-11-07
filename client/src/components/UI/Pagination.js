@@ -33,6 +33,7 @@ const Pagination = ({ page, size, data, colorLink, path, courseId ,fields,search
       )}
       {data[path].length > 0 && [
         <button
+        className="button-23"
           disabled={+page === 1 ? true : false}
           onClick={() =>
             navigate(
@@ -46,6 +47,7 @@ const Pagination = ({ page, size, data, colorLink, path, courseId ,fields,search
         </button>,
         fn(data.pages),
         <button
+        className="button-23"
           disabled={+page === +data.pages ? true : false}
           onClick={() =>
             navigate(

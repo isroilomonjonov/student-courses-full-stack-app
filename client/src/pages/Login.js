@@ -42,7 +42,7 @@ const Login = () => {
           className="input"
           id="text"
           type="text"
-          placeholder="username"
+          placeholder="Login"
           {...register("username", {
             required: { value: true, message: "Username kiriting" },
           })}
@@ -53,19 +53,19 @@ const Login = () => {
           id="password"
           className="input"
           type="password"
-          placeholder="password"
+          placeholder="Parol"
           {...register("password", {
             required: { value: true, message: "Password kiriting" },
           })}
         />
         {errors.password && <p>{errors.password.message}</p>}
-        <button className="btnLogin">JOIN</button>
+        <button className="button-9">JOIN</button>
         <button
           type="button"
           onClick={() => {
             navigate("/register");
           }}
-          className="btnLogin"
+          className="button-9"
         >
           Create Accaunt
         </button>

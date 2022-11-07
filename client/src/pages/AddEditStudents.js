@@ -107,18 +107,13 @@ const AddEditStudents = () => {
             {errors.func && (
               <p style={{ color: "red" }}> {errors.func.message}</p>
             )}
-            <button className="btnLogin">
+            <button className="button-23">
               {isUpdate ? "Update" : "Create"}
             </button>
       </form>
       <button
       type="primery"
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          border: "none",
-          color: "white",
-        }}
+      className="button-64"
         onClick={() => navigate(-1)}
       >
         ◀
