@@ -1,6 +1,8 @@
+import { toast } from "react-toastify";
 import http from "../utils/axios-instance";
 export const getCourses = async ({ page, size, search="",fields,sort }) => {
-  const res = await http(
+  try {
+    const res = await http(
     `/courses?page=${page || 1}&size=${size||2}&search=${search||""}&fields=${fields}&sort=${sort}`
   );
   return {
@@ -8,13 +10,23 @@ export const getCourses = async ({ page, size, search="",fields,sort }) => {
     pages: res.data.data.allCourses.pagination.allPagesCount,
     count: res.data.data.allCourses.pagination.allItemsCount,
   };
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+  
 };
 export const deleter = async (id) => {
-  const res = await http.delete(`/courses/${id}`);
+  try {
+      const res = await http.delete(`/courses/${id}`);
   return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+
 };
 export const submit = async ({ data, isUpdate, id, navigate, size }) => {
-  const res = await http({
+  try {
+    const res = await http({
     url: isUpdate
       ? `http://localhost:9090/api/v1/courses/${id}`
       : "http://localhost:9090/api/v1/courses",
@@ -23,9 +35,18 @@ export const submit = async ({ data, isUpdate, id, navigate, size }) => {
   });
   navigate(`/courses?page=1&size=${size || 2}`);
   return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+  
 };
 export const courseById = async ({ id, reset }) => {
-  const res = await http(`/courses/${id}`);
+  try {
+     const res = await http(`/courses/${id}`);
   reset(res.data.data.byId);
-  return [];
+  return []; 
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+
 };

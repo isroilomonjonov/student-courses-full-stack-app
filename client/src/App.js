@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
 import AddEditCourse from "./pages/AddEditCourse";
 import AddEditStudents from "./pages/AddEditStudents";
 import AddEditUsers from "./pages/AddEditUser";
@@ -46,6 +46,8 @@ function App() {
           {user?.role === "SuperAdmin" && (
             <Route path="/users" element={<Users />} />
           )}
+        <Route path="*" element={<Navigate to={"/"} />} />
+
         </Routes>
       </AppContext.Provider>
     </>

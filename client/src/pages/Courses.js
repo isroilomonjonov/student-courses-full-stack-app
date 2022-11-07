@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import { getCourses, deleter } from "../api/courses-api";
-import { BasicTable } from "../components/BasicTable";
+import { BasicTable } from "../components//Table/BasicTable";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../components/UI/Pagination";
 function Courses() {
@@ -56,7 +56,7 @@ function Courses() {
     {
       Header: "Name",
       accessor: (item) => (
-        <Link to={`/students?courseId=${item.id}`}>{item.name}</Link>
+        <Link to={`/students?course_id=${item.id}`}>{item.name}</Link>
       ),
     },
     { Header: "Description", accessor: "description" },
@@ -96,6 +96,7 @@ function Courses() {
         placeholder="seach"
         onChange={changeHandler}
       />
+      <br/>
 <button style={{color: fields?.includes("name")?"red":""}} onClick={()=>fieldSetter(page,size,search,fields,sort,"name")}>Name</button>
 <button style={{padding:"5px",color:sort===name||sort===`-${name}`?"red":""}} onClick={()=>sortSetter(name,setName,"name")}>{name==="-"?"desc":"asc"}</button>
 <button  style={{color: fields?.includes("description")?"red":""}} onClick={()=>fieldSetter(page,size,search,fields,sort,"description")}>Description</button>
@@ -107,7 +108,7 @@ function Courses() {
       ) : (
         <p>Malumotlar yoq</p>
       )}
-      {data && (
+      {data &&data.courses&& (
         <Pagination
           page={page}
           size={size}

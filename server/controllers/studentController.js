@@ -5,6 +5,7 @@ const AppError = require("../utils/appError")
 const {Op} =require("sequelize")
 const QueryBuilder = require("../utils/QueryBuilder")
 exports.getAllStudents = catchAsyn(async (req, res, next) => {
+  console.log(req.query,"query");
   const queryBuilder = new QueryBuilder(req.query)
   
   queryBuilder
@@ -12,7 +13,6 @@ exports.getAllStudents = catchAsyn(async (req, res, next) => {
     .paginate()
     .limitFields()
     .search(["first_name", "last_name"])
-  console.log(req.query.courseId);
   let allStudents = await Students.findAndCountAll(queryBuilder.queryOptions)
   allStudents = queryBuilder.createPage(allStudents)
   res.json({

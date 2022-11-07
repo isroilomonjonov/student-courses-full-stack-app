@@ -30,7 +30,7 @@ const Home = () => {
           </Link>
         )}
         <Link className="btn-link" to={`/users/${user?.id}`}>
-          Update User
+          Update Accaunt
         </Link>
         <button onClick={removed}>Log Out</button>
       </div>

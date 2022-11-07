@@ -1,0 +1,157 @@
+.basicTable {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  overflow: scroll;
+}
+.table {
+  width: 100%;
+  overflow: scroll;
+}
+table,
+table th,
+table td {
+  padding: 0.4rem 0.6rem;
+  border-collapse: collapse;
+}
+.td,
+.th {
+  border-collapse: collapse;
+  padding: 0.8rem;
+  border: none;
+}
+.tr:nth-child(even) {
+  background: #dfcffb;
+  border: none;
+  color: #7a7a7a;
+}
+.tr:nth-child(odd) {
+  background: #fff;
+  border: none;
+  color: #7a7a7a;
+}
+.td {
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 135%;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  color: #7a7a7a;
+  border: none;
+}
+.th {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 135%;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  background: #dfcffb;
+  color: black;
+  border: none;
+}
+
+/* .table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+.table .tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+.table .th,
+.table .td {
+  padding: .625em;
+  text-align: center;
+}
+
+.table .th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: #dfcffb;
+  color: black;
+
+}
+.tr:nth-child(odd) {
+  background: #fff;
+  border: none;
+  color: #7a7a7a;
+}
+.tr:nth-child(even) {
+  background: #dfcffb;
+  border: none;
+  color: #7a7a7a;
+}
+@media (max-width: 75rem) {
+  .table {
+    border: 0;
+  }
+
+  .table caption {
+    font-size: 1.3em;
+  }
+  
+  .table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .table .tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .table .td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  .table .td::before {
+
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .table .td:last-child {
+    border-bottom: 0;
+  }
+  .tr:nth-child(odd) {
+    background: #fff;
+    border: none;
+    color: #7a7a7a;
+  }
+  .tr:nth-child(even) {
+    background: #fff;
+    border: none;
+    color: #7a7a7a;
+  }
+}
+ */

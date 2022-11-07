@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import { getUsers, deleter } from "../api/users-api";
-import { BasicTable } from "../components/BasicTable";
+import { BasicTable } from "../components/Table/BasicTable";
 import Pagination from "../components/UI/Pagination";
 import { useState } from "react";
 function Users() {

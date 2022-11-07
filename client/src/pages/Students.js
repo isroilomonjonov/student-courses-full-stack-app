@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import { getStudents, deleter } from "../api/students-api";
-import { BasicTable } from "../components/BasicTable";
+import { BasicTable } from "../components/Table/BasicTable";
 import Pagination from "../components/UI/Pagination";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -19,12 +19,11 @@ function Students() {
   const { send: deleteStudent } = useHttp(deleter);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const courseId = searchParams.get("courseId");
+  const courseId = searchParams.get("course_id");
   const page = searchParams.get("page") || 1;
   const size = searchParams.get("size") || 2;
   const search = searchParams.get("search");
   const navigate = useNavigate();
-  const [img,setImg]=useState([])
   const colorLink = page;
   const {
     register,
@@ -39,7 +38,7 @@ function Students() {
     const timer = setTimeout(() => {
       navigate(
         `.?search=${value === null ? "" : value}${
-          courseId ? `&courseId=${courseId}` : ""
+          courseId ? `&course_id=${courseId}` : ""
         }`
       );
     }, 200);
