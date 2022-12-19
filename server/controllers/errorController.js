@@ -17,8 +17,13 @@ const sendErrorProd = (err, res) => {
 const errorController = (err, req, res, next) => {
   console.log(err.stack);
   console.log(err);
+  
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
+  return  res.status(err?.statusCode).json({
+    status: err?.status||"error",
+    message: err.message||"error"
+})
   if (process.env.NODE_ENV === "dev") {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === "prod") {

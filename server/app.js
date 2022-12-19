@@ -14,7 +14,6 @@ app.use("/api/v1/students",authMiddleware,studentRoutes)
 app.use("/api/v1/courses",authMiddleware,coursesRouter)
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/auth", authRouter);
-app.use(express.static("./static"))
 app.use(express.static(__dirname + "/build"));
 app.get("*", (req, res) => {
    return res.sendFile(__dirname + "/build/index.html");
