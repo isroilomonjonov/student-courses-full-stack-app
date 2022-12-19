@@ -6,7 +6,6 @@ const errorController=require('./controllers/errorController')
 const authMiddleware = require("./middleware/authMiddleware");
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRoutes");
-const index=require('./build/index.html')
 const cors = require('cors');
 const app = express()
 app.use(express.json())
@@ -17,10 +16,7 @@ app.use("/api/v1/users",userRouter)
 app.use("/api/v1/auth", authRouter);
 app.use(express.static(__dirname + "/build"));
 app.get("*", (req, res) => {
-   return res.sendFile(index);
-  });
-app.all("*", (req, res, next) => {
-   return next(new AppError(`Path ${req.path} not exists`, 404));
-});
+   res.sendFile(__dirname + "/build/index.html");
+ });
 app.use(errorController)
 module.exports =app
