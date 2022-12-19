@@ -17,10 +17,10 @@ app.use("/api/v1/auth", authRouter);
 app.use(express.static("./static"))
 app.use(express.static(__dirname + "/build"));
 app.get("*", (req, res) => {
-    res.sendFile(__dirname + "/build/index.html");
+   return res.sendFile(__dirname + "/build/index.html");
   });
 app.all("*", (req, res, next) => {
-    next(new AppError(`Path ${req.path} not exists`, 404));
+   return next(new AppError(`Path ${req.path} not exists`, 404));
 });
 app.use(errorController)
 module.exports =app
