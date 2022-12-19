@@ -1,7 +1,7 @@
 const { DataTypes} = require("sequelize");
 const sequelize = require("../utils/db");
 const Users = sequelize.define(
-  "users",
+  "users_students",
   {
     id: {
       primaryKey: true,
