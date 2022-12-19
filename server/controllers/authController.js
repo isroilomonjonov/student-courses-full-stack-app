@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const { Op } = require("sequelize");
 const User = require("../models/User");
-const AppError = require("../utils/appError");
+const AppError = require("../utils/AppError");
 const catchAsyn = require("../utils/catchAsync");
 const {sendVerificationMail}=require("../utils/mailUtils")
 const jwt = require("jsonwebtoken");
