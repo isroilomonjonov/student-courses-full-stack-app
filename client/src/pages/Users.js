@@ -64,7 +64,6 @@ function Users() {
     <Layout title="Users">
       <input
     className="search"
-
         type="text"
         value={value}
         placeholder="search"

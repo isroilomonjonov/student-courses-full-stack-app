@@ -27,22 +27,7 @@ const findByUsername = async username => {
   return null;
 };
 exports.register = catchAsyn(async (req, res, next) => {
-   const Admin={
-      firstName:"Isroil",
-      lastName:"Omonjonov",
-      username:"admin",
-      email:"olimjonazizov10@gmail.com",
-      password:"admin123",
-      phoneNumber: "998908171355",
-      vericationCode:null,
-      vericationCodeByPhone:null,
-      isVerified:true,
-      role:"SuperAdmin"
-   }
-   const SuperAdmin=await User.findAll({where:{role:{[Op.eq]:"SuperAdmin"}}})
-   if(SuperAdmin.length===0){
-     const SAdmin = await User.create(Admin);
-   }
+  
   const validationErrorrs = validationResult(req);
   if (!validationErrorrs.isEmpty()) {
     const err = new AppError("Validation error", 400);
@@ -66,21 +51,7 @@ exports.register = catchAsyn(async (req, res, next) => {
   });
 });
 exports.registerbyphone = catchAsyn(async (req, res, next) => {
-  const Admin={
-     firstName:"Isroil",
-     lastName:"Omonjonov",
-     username:"admin",
-     email:"olimjonazizov10@gmail.com",
-     password:"admin123",
-     phoneNumber: "998908171355",
-     vericationCode:null,
-     isVerified:true,
-     role:"SuperAdmin"
-  }
-  const SuperAdmin=await User.findAll({where:{role:{[Op.eq]:"SuperAdmin"}}})
-  if(SuperAdmin.length===0){
-    const SAdmin = await User.create(Admin);
-  }
+
   const validationErrorrs = validationResult(req);
   if (!validationErrorrs.isEmpty()) {
    const err = new AppError("Validation error", 400);
