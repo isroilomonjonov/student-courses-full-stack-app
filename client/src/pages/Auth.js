@@ -16,7 +16,7 @@ const Auth = (props) => {
   const registerHandler = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:9090/api/v1/auth/register",
+        "https://student-course-t530.onrender.com/api/v1/auth/register",
         data
       );
       toast.success(res.data.message)
