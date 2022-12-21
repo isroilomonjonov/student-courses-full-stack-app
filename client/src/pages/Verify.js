@@ -9,7 +9,7 @@ const Verify = () => {
   const verify = async () => {
     try {
       const res = await axios(
-        `http://localhost:9090/api/v1/users/verify/${params.id}`
+        `https://student-course-t530.onrender.com/api/v1/users/verify/${params.id}`
       );
       toast.success(res.data.message);
     } catch (error) {

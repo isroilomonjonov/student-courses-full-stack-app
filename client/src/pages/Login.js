@@ -16,7 +16,7 @@ const Login = () => {
   const loginHandler = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:9090/api/v1/auth/login",
+        "https://student-course-t530.onrender.com/api/v1/auth/login",
         data
       );
       if (!res.data.data.user.isVerified) {

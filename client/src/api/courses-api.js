@@ -28,8 +28,8 @@ export const submit = async ({ data, isUpdate, id, navigate, size }) => {
   try {
     const res = await http({
     url: isUpdate
-      ? `http://localhost:9090/api/v1/courses/${id}`
-      : "http://localhost:9090/api/v1/courses",
+      ? `https://student-course-t530.onrender.com/api/v1/courses/${id}`
+      : "https://student-course-t530.onrender.com/api/v1/courses",
     method: isUpdate ? "PATCH" : "POST",
     data: data,
   });
