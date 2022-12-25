@@ -14,7 +14,7 @@ exports.sendVerificationMail = ({to, vercode}) => {
     from: "omonjonovisroil65@gmail.com",
     to: to,
     subject: "Verification mail",
-    html:`<h1>Hi ${to}</h1><p>Please Verify</p><button style=padding:100px,background-color:blue><a href="https://student-course-full-stack-app.onrender.com/verify/${vercode}">Verify</a></button>`,
+    html:`<h1>Hi ${to}</h1><p>Please Verify</p><button style=padding:100px,background-color:blue><a href="https://student-courses-full-stack-app.vercel.app/verify/${vercode}">Verify</a></button>`,
   };
 
   transporter.sendMail(options, (err, info) => {
