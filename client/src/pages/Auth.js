@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PulseLoader from "react-spinners/PulseLoader";
+
 const Auth = (props) => {
   const navigate = useNavigate();
+  const [loader,setLoader] = useState(false)
   const regex1 =/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
   const {
     register,
@@ -15,6 +18,7 @@ const Auth = (props) => {
         /* REGISTER FOR EMAIL */
   const registerHandler = async (data) => {
     try {
+      setLoader(true)
       const res = await axios.post(
         "https://student-course-t530.onrender.com/api/v1/auth/register",
         data
@@ -23,6 +27,9 @@ const Auth = (props) => {
       setA(res.data.message);
     } catch (error) {
       toast.error(error.response.data.message);
+    }
+    finally{
+      setLoader(true)
     }
   };
   //REGISTER BY PHONE NUMBER
@@ -138,7 +145,16 @@ const Auth = (props) => {
             
           />
           {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
-          <button className="button-9">Create Accaunt</button>
+          <button className="button-9">
+          {loader&& <PulseLoader
+        color={"blue"}
+        loading={loader}
+        size={20}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />}
+           {!loader&&"Create Accaunt"}
+            </button>
           <button
           className="button-9"
             type="button"

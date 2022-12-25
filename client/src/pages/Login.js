@@ -1,12 +1,13 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import AppContext  from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PulseLoader from "react-spinners/PulseLoader";
 const Login = () => {
   const {setUser,user,setIsAuth}= useContext(AppContext);
-
+  const [loader,setLoader] = useState(false)
   const navigate = useNavigate();
   const {
     register,
@@ -15,6 +16,7 @@ const Login = () => {
   } = useForm();
   const loginHandler = async (data) => {
     try {
+      setLoader(true)
       const res = await axios.post(
         "https://student-course-t530.onrender.com/api/v1/auth/login",
         data
@@ -29,6 +31,9 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
+    }
+    finally{
+      setLoader(false)
     }
   };
 
@@ -59,7 +64,16 @@ const Login = () => {
           })}
         />
         {errors.password && <p>{errors.password.message}</p>}
-        <button className="button-9">JOIN</button>
+        <button className="button-9">
+       {loader&& <PulseLoader
+        color={"blue"}
+        loading={loader}
+        size={20}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />}
+         {!loader&& "JOIN"}
+          </button>
         <button
           type="button"
           onClick={() => {
