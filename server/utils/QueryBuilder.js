@@ -74,8 +74,8 @@ class QueryBuilder {
 	}
 
 	paginate() {
-		const page = (this.queryParams.page ||= 1);
-		const limit = (this.queryParams.size ||= 500);
+		const page = (this.queryParams.page || 1);
+		const limit = (this.queryParams.size || 500);
 		this.queryOptions.limit = limit;
 		this.queryOptions.offset = (page - 1) * limit;
 		return this;
