@@ -41,13 +41,13 @@ function App() {
       <Routes>
         <Route path="/register" element={<Auth />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/courses/:id" element={<AddEditCourse />} />
-        <Route path="/students/:id" element={<AddEditStudents/>} />
+      {ctx.isAuth&&  <Route path="/courses/:id" element={<AddEditCourse />} />}
+      {ctx.isAuth&&   <Route path="/students/:id" element={<AddEditStudents/>} />}
 
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/settings/:id" element={<AddEditUser/>} />
+      {ctx.isAuth&&  <Route path="/" element={<Dashboard />} />}
+      {ctx.isAuth&&  <Route path="/courses" element={<Courses />} />}
+      {ctx.isAuth&&  <Route path="/students" element={<Students />} />}
+      {ctx.isAuth&&  <Route path="/settings/:id" element={<AddEditUser/>} />}
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </>
