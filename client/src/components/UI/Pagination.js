@@ -16,7 +16,7 @@ const Pagination = ({ page, size, data, colorLink, path, courseId ,fields,search
           }}
           to={`.?size=${size || 2}&page=${index + 1}${
             courseId ? (courseId = `&${courseId}`) : ""
-          }&fields=${fields||""}&search=${search||""}&sort=${sort||""}`}
+          }&fields=${fields||""}&search=${search||""}`}
         >
           {index + 1}
         </Link>
@@ -26,11 +26,7 @@ const Pagination = ({ page, size, data, colorLink, path, courseId ,fields,search
   };
   return (
     <>
-      {page && data && (
-        <p>
-          All {path} {data.count}{" "}
-        </p>
-      )}
+     
       {data[path].length > 0 && [
         <button
         className="button-23"

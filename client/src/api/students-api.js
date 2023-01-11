@@ -19,6 +19,20 @@ export const getStudents = async ({ page, size, courseId, search = "" }) => {
   }
  
 };
+export const getStudentsStatistics = async () => {
+
+  try {
+  const res = await axiosInstance(`students/statistics`);
+  return {
+    active: res.data.data.active,
+    inActive: res.data.data.inActive,
+    all:res.data.data.active+res.data.data.inActive
+  };
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+ 
+};
 export const deleter = async (id) => {
   try {
      const res = await axiosInstance.delete(`/students/${id}`);
@@ -35,7 +49,20 @@ export const submit = async ({ data, isUpdate, id, query, navigate }) => {
     method: isUpdate ? "PATCH" : "POST",
     data: data
   });
-  navigate("/students?page=1&size=2");
+  navigate("/students");
+  return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+ 
+};
+export const changeStatusHandler = async ({ data,  id }) => {
+  try {
+     const res = await axiosInstance({
+    url:`/students/${id}` ,
+    method:"PUT",
+    data: {status:data}
+  });
   return res.data;
   } catch (error) {
     toast.error(error.response.data.message)
@@ -44,9 +71,9 @@ export const submit = async ({ data, isUpdate, id, query, navigate }) => {
 };
 export const getAllCourses = async () => {
   try {
-      const res = await http( `/courses?page=1&size=200&fields=id,name,description`);
-  console.log(res);
-  return res.data.data.allCourses.content;
+      const res = await http( `/courses/all`);
+      console.log(res);
+  return res.data.data.allCourses;
   } catch (error) {
     toast.error(error.response.data.message)
   }
@@ -65,6 +92,7 @@ export const studentsById = async ({ id, reset }) => {
   try {
       const res = await axiosInstance(`/students/${id}`);
   reset(res.data.data.byId);
+  console.log(res.data.data.byId);
   return  res.data.data.byId
   } catch (error) {
     toast.error(error.response.data.message)

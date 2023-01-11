@@ -5,8 +5,11 @@ import AppContext  from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PulseLoader from "react-spinners/PulseLoader";
+import http from "../utils/axios-instance";
 const Login = () => {
-  const {setUser,user,setIsAuth}= useContext(AppContext);
+
+  const ctx= useContext(AppContext);
+  console.log(ctx);
   const [loader,setLoader] = useState(false)
   const navigate = useNavigate();
   const {
@@ -17,19 +20,25 @@ const Login = () => {
   const loginHandler = async (data) => {
     try {
       setLoader(true)
-      const res = await axios.post(
-        "https://student-course-t530.onrender.com/api/v1/auth/login",
-        data
-      );
+      const res = await http({
+       url: "/auth/login",
+        data,
+        method: "POST",
+      });
       if (!res.data.data.user.isVerified) {
         toast.error("Verificatsiyadan O'ting");
         return
       }
       localStorage.setItem("token", res.data.data.user.token);
       localStorage.setItem("user",JSON.stringify(res.data.data.user));
-      setIsAuth(true)
+      ctx.setAppData({
+				user: JSON.parse(localStorage.getItem("user")),
+				token: localStorage.getItem("token"),
+				isAuth: true,
+			});
       navigate("/");
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message);
     }
     finally{
@@ -39,7 +48,7 @@ const Login = () => {
 
   return (
     <div className="loginPage">
-      <div>{user}</div>
+      {/* <div>{user}</div> */}
       <form onSubmit={handleSubmit(loginHandler)} className="form">
         <h1 className="welcome">Welcome!</h1>
         <label htmlFor="text"></label>

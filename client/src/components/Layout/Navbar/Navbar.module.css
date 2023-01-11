@@ -1,0 +1,149 @@
+.navbar {
+  padding: 1.6rem ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color:rgb(250,251,255);
+}
+
+.formControl {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+
+
+.arrowForBtn {
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  transition: all 300ms;
+  position: absolute;
+  top: 45%;
+  left: -1.1%;
+}
+.searchSvg {
+  position: absolute;
+  top: 0.6rem;
+  left: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-right:2rem ;
+}
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  justify-content: end;
+}
+.userMenuModal {
+  position: absolute;
+  bottom: -8rem;
+  left: 0;
+  width: 80%;
+  margin: 0 auto;
+  z-index: 600;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.3rem 0.5rem grey;
+  display: none;
+}
+.username{
+  font-weight: 500;
+font-size: 24px;
+line-height: 36px;
+text-align: center;
+}
+.userMenuModalItem {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.4rem;
+  letter-spacing: 0.02rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  width: 80%;
+  margin: 0.5rem auto;
+}
+.userMenuModalItem:hover {
+  background-color: #7d41ed;
+  border-radius: 0.5rem;
+  color: #fff;
+}
+
+.modalShow {
+  display: inline-block;
+}
+
+.black{
+  display: none;
+  stroke: #000;
+  border:1px solid red
+}
+.white{
+  stroke: #fff;
+  border:1px solid yellow
+
+}
+
+
+@media (max-width: 980px) {
+  .arrowForBtn {
+    transition: all 300ms;
+    position: absolute;
+    top: 35%;
+    left: 1%;
+  }
+}
+
+@media (max-width: 640px) {
+
+
+  .modalShow {
+    width: 100px;
+  }
+
+  .userMenuModal {
+    left: -5rem;
+    width: 10rem;
+    bottom: -7rem;
+    padding: 0.5rem 0.5rem;
+  }
+
+  .userMenuModalItem {
+    margin: 0;
+  }
+
+  .navbar {
+    padding: 1rem 3rem 1rem 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .formControl {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .userInfo {
+    gap: 1.5rem;
+  }
+
+  .formControl {
+    width: 50%;
+  }
+}

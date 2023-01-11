@@ -1,0 +1,73 @@
+.layout {
+  /* position: relative; */
+  overflow: hidden;
+}
+.layoutBox {
+  background-color:rgb(250,251,255);
+  flex-grow: 1;
+  padding: 2rem 1.5rem 1rem 1rem;
+  overflow: auto;
+}
+.contents {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 84%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 16%;
+  transition: all 600ms ease-in-out;
+}
+
+.containerFull {
+  width: 91%;
+  left: 9%;
+}
+
+.pathRoad {
+  display: flex;
+  gap: 2rem;
+}
+
+.pageName {
+  font-weight: 500;
+  margin-bottom: 2.4rem;
+}
+
+.goBack {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  width: 15rem;
+  /* background-color: rgb(191, 192, 191); */
+}
+
+.goBack:hover {
+  color: blue;
+}
+
+@media (max-width: 980px) {
+  .containerFull {
+    width: 100%;
+    left: 0%;
+  }
+  .containerTablet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    transition: all 600ms ease-in-out;
+  }
+  /* .hiddenContainer {
+    display: none;
+  } */
+  .layout {
+    overflow: hidden;
+  }
+}

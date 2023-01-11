@@ -1,7 +1,8 @@
 const { DataTypes} = require("sequelize");
 const sequelize = require("../utils/db");
+const Courses = require("./Courses");
 const Users = sequelize.define(
-  "users_students",
+  "users",
   {
     id: {
       primaryKey: true,
@@ -48,16 +49,18 @@ const Users = sequelize.define(
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: true
     },
     role: {
-      type: DataTypes.ENUM(["SuperAdmin","Admin"]),
-      defaultValue:"Admin"
-    },
+      type: DataTypes.ENUM(["SUPER_ADMIN","ADMIN"]),
+      defaultValue:"ADMIN"
+    }
   },
   {
     underscored: true,
   }
 );
+Users.hasMany(Courses)
+Courses.belongsTo(Users)
 
 module.exports = Users;

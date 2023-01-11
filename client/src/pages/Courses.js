@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import { getCourses, deleter } from "../api/courses-api";
-import { BasicTable } from "../components//Table/BasicTable";
+import  BasicTable  from "../components//Table/BasicTable";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../components/UI/Pagination";
 function Courses() {
@@ -65,17 +65,23 @@ function Courses() {
       accessor: (course) => {
         return (
           <div>
-            <Link
+            <button  
+              style={{ padding: "5px", margin: "2px", fontSize: "20px" }}
+            
+            >
+               <Link
               to={`/courses/${course.id}`}
               style={{ width: "50px", height: "50px" }}
             >
-              📝
+              O'zgartirish
             </Link>
+            </button>
+           
             <button
               style={{ padding: "5px", margin: "2px", fontSize: "20px" }}
               onClick={deleteHandler.bind(null, course.id)}
             >
-              🗑
+              O'chirish
             </button>
           </div>
         );
