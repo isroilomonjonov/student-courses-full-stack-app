@@ -1,14 +1,16 @@
-import Layout from "../components/Layout";
-import { useEffect } from "react";
+import Layout from "../../components/Layout/Layout";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { submit, courseById } from "../api/courses-api";
-import useHttp from "../hooks/use-http";
+import { submit, courseById } from "../../api/courses-api";
+import useHttp from "../../hooks/use-http";
 import { useSearchParams } from "react-router-dom";
+import AppContext from "../../context/AppContext";
 
 const AddEditCourse = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const ctx=useContext(AppContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const size = searchParams.get("size");
   const isUpdate = params.id !== "new";
@@ -27,11 +29,12 @@ const AddEditCourse = () => {
   }, []);
 
   return (
-    <Layout title={isUpdate ? "Update Course" : "Add new course"}>
+    <Layout>
+      <h1 style={{textAlign: "center"}}>{isUpdate ? "Kursni Yangilash" : "Kurs Yaratmoq"}</h1>
       <form
-        className="form"
+        className="form2"
         onSubmit={handleSubmit((data) =>
-          formSubmit({ data: data, isUpdate, id: params.id, navigate, size })
+          formSubmit({ data: data, isUpdate, id: params.id, navigate, size,userId:ctx.user.id })
         )}
       >
         <label htmlFor="text"></label>
@@ -39,23 +42,23 @@ const AddEditCourse = () => {
           className="input"
           id="text"
           type="text"
-          placeholder="Name"
+          placeholder="Kurs Nomi"
           {...register("name", {
-            required: { value: true, message: "Name kiriting" },
+            required: { value: true, message: "Kurs Nomini Kiriting" },
           })}
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <p style={{fontSize:"1.5rem",color:"red"}}>{errors.name.message}</p>}
         <label htmlFor="description"></label>
         <input
           className="input"
           id="description"
           type="text"
-          placeholder="Description"
+          placeholder="Kurs Tavsifi"
           {...register("description", {
-            required: { value: true, message: "Description kiriting" },
+            required: { value: true, message: "Kurs Tavsifini Kiriting" },
           })}
         />
-        {errors.description && <p>{errors.description.message}</p>}
+        {errors.description && <p style={{fontSize:"1.5rem",color:"red"}}>{errors.description.message}</p>}
         <button className="button-23">{isUpdate ? "Update" : "Create"}</button>
       </form>
       <button

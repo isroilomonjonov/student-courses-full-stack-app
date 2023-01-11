@@ -26,7 +26,7 @@ const findByUsername = async username => {
   }
   return null;
 };
-exports.register = catchAsyn(async (req, res, next) => {
+exports.registerByEmail = catchAsyn(async (req, res, next) => {
   
   const validationErrorrs = validationResult(req);
   if (!validationErrorrs.isEmpty()) {
@@ -73,6 +73,49 @@ exports.registerbyphone = catchAsyn(async (req, res, next) => {
    error: null,
    data:null
  });
+});
+
+
+
+exports.register = catchAsyn(async (req, res, next) => {
+  
+  const validationErrorrs = validationResult(req);
+  if (!validationErrorrs.isEmpty()) {
+    const err = new AppError("Validation error", 400);
+    err.isOperational = false;
+    err.errors = validationErrorrs.errors;
+    return next(err);
+  }
+  const existedUser = await findByUsername(req.body.username);
+  req.body.username.toLowerCase()
+  if (existedUser) {
+    return next(new AppError("Bunday Usernameli foydalanuvchi mavjud ", 409));
+  }
+  const newUser = await User.create(req.body);
+  const payload = {
+    id: newUser.id,
+    firstName: newUser.firstName,
+    lastName: newUser.lastName,
+    username: newUser.username,
+    email: newUser.email,
+    isVerified: newUser.isVerified,
+    role: newUser.role,
+  };
+  const token = await generateToken(payload, process.env.JWT_SECRET, {
+    algorithm: "HS512",
+    expiresIn: "24h",
+  });
+  res.json({
+    status: "success",
+    message: "",
+    error: null,
+    data: {
+      user: {
+        ...payload,
+        token: token
+      },
+    },
+  });
 });
 exports.login = catchAsyn(async (req, res, next) => {
   const validationErrorrs = validationResult(req);

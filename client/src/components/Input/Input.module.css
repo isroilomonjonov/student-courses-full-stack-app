@@ -1,0 +1,83 @@
+.formControl {
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.01em;
+  color: #4b5563;
+  margin-bottom: 1.6rem;
+  width: 100%;
+}
+
+.input {
+  padding: 1rem 1rem 1rem 1.6rem;
+  background: #ffffff;
+  border: 0.1rem solid #a7abb6;
+  border-radius: 0.7rem;
+  outline: none;
+  width: 100%;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  align-items: center;
+  letter-spacing: -0.01em;
+  color: #7a7a7a;
+}
+
+.input:focus {
+  background: rgba(125, 65, 237, 0.1);
+  border: 0.1rem solid #7d41ed;
+  border-radius: 0.7rem;
+}
+
+.input:hover {
+  background: rgba(125, 65, 237, 0.05);
+  border: 0.1rem solid #7d41ed;
+}
+
+.input[type="checkbox"] {
+  accent-color: #7d41ed;
+  zoom: 2;
+  outline: none;
+  background: #ffffff;
+  border: 0.1 solid #9ca3af;
+  border-radius: 0.4rem;
+}
+
+.input[type="checkbox"]:disabled {
+  accent-color: #9ca3af;
+}
+
+.error {
+  border: 0.1rem solid #ff5f4a;
+}
+
+.errorText {
+  color: #ff5f4a;
+}
+
+.errorTextNone {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  align-items: center;
+  letter-spacing: -0.01em;
+  color: transparent;
+}
+
+.success {
+  border: 0.1rem solid #1fb186;
+}

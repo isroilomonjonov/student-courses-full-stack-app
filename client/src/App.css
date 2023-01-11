@@ -27,6 +27,9 @@ li {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+a[disabled]{
+  pointer-events: none;
+}
 
 .App-link {
   color: #61dafb;

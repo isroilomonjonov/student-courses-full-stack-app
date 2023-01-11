@@ -2,7 +2,7 @@ const { DataTypes} = require("sequelize");
 const sequelize = require("../utils/db");
 const Students=require("./Students")
 const Courses = sequelize.define(
-  "courses_full_stack",
+  "courses",
   {
     id: {
       primaryKey: true,
@@ -14,9 +14,14 @@ const Courses = sequelize.define(
       allowNull: false,
     },
     description:DataTypes.TEXT,
+    status:{type:DataTypes.BOOLEAN,
+      defaultValue:true
+    }
   },
   {
     underscored: true,
   }
 );
+Courses.hasMany(Students)
+Students.belongsTo(Courses)
 module.exports = Courses;

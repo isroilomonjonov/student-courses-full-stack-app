@@ -21,9 +21,16 @@ const Students = sequelize.define(
         isBefore: "2020-01-01"
       },
     },
-    course_id:{
-     type: DataTypes.INTEGER,
-     allowNull:true
+    phoneNumber:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    payment:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    status:{type:DataTypes.BOOLEAN,
+      defaultValue:true
     }
   },
   {

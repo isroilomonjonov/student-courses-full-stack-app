@@ -16,7 +16,7 @@ module.exports = catchAsync(async () => {
 			vericationCode:null,
 			vericationCodeByPhone:null,
 			isVerified:true,
-			role:"SuperAdmin"
+			role:"SUPER_ADMIN"
 		 }
 		const createdUser = await User.create(superAdminInfo);
 	}

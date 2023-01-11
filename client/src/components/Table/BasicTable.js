@@ -2,7 +2,7 @@ import React from "react";
 import { useTable } from "react-table";
 import styles from "./BasicTable.module.css";
 
-export const BasicTable = ({ columns, data, pagination, url }) => {
+ const BasicTable = ({ columns, data ,style}) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,
@@ -11,7 +11,7 @@ export const BasicTable = ({ columns, data, pagination, url }) => {
 
   return data.length > 0 ? (
     <div className={styles.basicTable}>
-      <table className={styles.table} {...getTableProps()}>
+      <table className={styles.table} style={style} {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup, i, arr) => {
             return (
@@ -52,10 +52,10 @@ export const BasicTable = ({ columns, data, pagination, url }) => {
                 {...row.getRowProps()}
               >
                 {row.cells.map((cell) => {
-                  // console.log(cell);
                   return (
                     <td
-                    data-label={cell.column.Header}
+                    
+                      data-label={cell.column.Header}
                       className={styles.td}
                       key={cell.column.id}
                       {...cell.getCellProps()}
@@ -74,3 +74,4 @@ export const BasicTable = ({ columns, data, pagination, url }) => {
     <p>Malumotlar yoq</p>
   );
 };
+export default BasicTable

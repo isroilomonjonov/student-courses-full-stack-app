@@ -1,0 +1,25 @@
+.toggleButton {
+  width: 5.3rem;
+  height: 2.8rem;
+  border-radius: 15.5px;
+  padding: 0.2rem;
+  background-color: #9ca3af;
+  cursor: pointer;
+}
+
+.buttonEnabled {
+  background-color: #7d41ed;
+}
+
+.toggle {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 14.5px;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
+  transition: all 300ms;
+}
+
+.toggleEnabled {
+  transform: translateX(100%);
+}

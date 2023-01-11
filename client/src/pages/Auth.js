@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PulseLoader from "react-spinners/PulseLoader";
+import http from "../utils/axios-instance";
+import AppContext from "../context/AppContext";
 
 const Auth = (props) => {
   const navigate = useNavigate();
+  const ctx= useContext(AppContext);
+
   const [loader,setLoader] = useState(false)
   const regex1 =/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
   const {
@@ -14,17 +18,24 @@ const Auth = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [a, setA] = useState();
         /* REGISTER FOR EMAIL */
   const registerHandler = async (data) => {
     try {
       setLoader(true)
-      const res = await axios.post(
-        "https://student-course-t530.onrender.com/api/v1/auth/register",
-        data
-      );
-      toast.success(res.data.message)
-      setA(res.data.message);
+      const res = await http({
+        url:"/auth/register",
+        data,
+        method: "POST"
+      });
+      localStorage.setItem("token", res.data.data.user.token);
+      localStorage.setItem("user",JSON.stringify(res.data.data.user));
+      ctx.setAppData({
+				user: JSON.parse(localStorage.getItem("user")),
+				token: localStorage.getItem("token"),
+				isAuth: true,
+			});
+      navigate("/");
+
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -59,11 +70,11 @@ const Auth = (props) => {
   // };
   return (
     <div className="loginPage">
-      {a ? (
-        <>
+      {/* {a ? (
+        <> */}
         {/* REGISTER FOR EMAIL */}
-        <h1 color={{color:"white"}}>{a}</h1>
-        <a style={{color: 'white'}} href="https://mail.google.com/">Gmail</a>
+        {/* <h1 color={{color:"white"}}>{a}</h1>
+        <a style={{color: 'white'}} href="https://mail.google.com/">Gmail</a> */}
         {/* REGISTER BY PHONE NUMBER */}
          {/* <form onSubmit={handleSubmit(loginHandler)}>
           <h1>SMS Habardagi Kodni Kiriting</h1>
@@ -73,8 +84,8 @@ const Auth = (props) => {
           })}/>
           <button>Tekshirsh</button>
          </form> */}
-        </>
-      ) : (
+        {/* </> */}
+      {/* ) : ( */}
         <form onSubmit={handleSubmit(registerHandler)} className="form">
           <h1 className="welcome">Welcome!</h1>
           <label for="text"></label>
@@ -137,7 +148,7 @@ const Auth = (props) => {
           <input
             id="phoneNumber"
             className="input"
-            type="number"
+            type="string"
             placeholder="Telefon raqamingiz"
             {...register("phoneNumber", {
               required: { value: true, message: "PhoneNumber kiriting" },
@@ -165,7 +176,7 @@ const Auth = (props) => {
             I Have Accaunt
           </button>
         </form>
-      )} 
+      {/* )}  */}
     </div>
   );
 };

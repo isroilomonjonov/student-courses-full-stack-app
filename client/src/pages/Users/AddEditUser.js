@@ -1,13 +1,13 @@
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import useHttp from "../hooks/use-http";
-import { updateUser, usersById } from "../api/users-api";
+import useHttp from "../../hooks/use-http";
+import { updateUser, usersById } from "../../api/users-api";
 
 const AddEditCourse = () => {
   const params = useParams();
-  const regex=/(?:\+\([9]{2}[8]\)[0-9]{2}\ [0-9]{3}\-[0-9]{2}\-[0-9]{2})/g;
+  const regex = /(?:\+\([9]{2}[8]\)[0-9]{2}\ [0-9]{3}\-[0-9]{2}\-[0-9]{2})/g;
   const navigate = useNavigate();
   const {
     register,
@@ -22,12 +22,16 @@ const AddEditCourse = () => {
   }, []);
 
   return (
-    <Layout title={"Update User"}>
+    <Layout>
+      <h1 style={{ textAlign: "center" }}>
+        Foydalanuvchi Malumotlarini Yangilash
+      </h1>
+
       <form
         onSubmit={handleSubmit((data) =>
           formSubmit({ data, id: params.id, navigate })
         )}
-        className="form"
+        className="form2"
       >
         <label for="text"></label>
         <input
@@ -59,7 +63,9 @@ const AddEditCourse = () => {
           placeholder="username"
           {...register("username", {
             required: { value: true, message: "Username kiriting" },
-            validate:value=>value===value.toLowerCase()||"Faqat Kichik Harf Kiritish Mumkin"
+            validate: (value) =>
+              value === value.toLowerCase() ||
+              "Faqat Kichik Harf Kiritish Mumkin",
           })}
         />
         {errors.username && <p>{errors.username.message}</p>}
@@ -92,17 +98,14 @@ const AddEditCourse = () => {
           type="number"
           placeholder="PhoneNumber"
           {...register("phoneNumber", {
-            required: { value: true, message: "PhoneNumber kiriting" }
+            required: { value: true, message: "PhoneNumber kiriting" },
           })}
         />
         {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
 
-        <button className="button-23">Update Accaunt</button>
+        <button className="button-23">Yangilash</button>
       </form>
-      <button
-         className="button-64"
-        onClick={() => navigate(-1)}
-      >
+      <button className="button-64" onClick={() => navigate(-1)}>
         ◀
       </button>
     </Layout>
