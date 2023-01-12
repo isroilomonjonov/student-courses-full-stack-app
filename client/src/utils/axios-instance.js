@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosInstance=axios.create({
-  baseURL: "http://localhost:9090/api/v1"
+  baseURL: "https://student-course-t530.onrender.com"
 });
 // https://student-course-t530.onrender.com
 axiosInstance.interceptors.request.use((config)=>{
