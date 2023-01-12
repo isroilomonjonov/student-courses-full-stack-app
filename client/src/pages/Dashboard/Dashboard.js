@@ -22,16 +22,16 @@ const Dashboard = () => {
 
     return ( 
         <Layout>
-            <div className={styles.container}>
-                <div style={{height:'40rem',width:'30%'}}>
+              <div style={{display: 'flex',width: '100%',height: '100%'}}>
+                  <div style={{width:'100%'}}>
                   <h2 style={{textAlign:'center'}}>O'quvchilar Statistikasi</h2>  
                 {value&&<ChartPie data={{value:Object.values(value),label:["Faol O'quvchilar","Faol Bo'lmagan O'quvchilar","Hamma O'quvchilar"]}} style={{width:"50rem"}}/>}
                 </div>
-                <div style={{height:'40rem',width:'30%'}}>
+                <div style={{width:'100%'}}>
                   <h2 style={{textAlign:'center'}}>Kurslar Statistikasi</h2>  
                 {valueCourses&&<ChartPie data={{value:Object.values(valueCourses),label:["Faol Kurslar","Tugatilgan Kurslar","Hamma Kurslar"]}} style={{width:"50rem"}}/>}
                 </div>
-            </div>
+              </div>
         </Layout>
      );
 }

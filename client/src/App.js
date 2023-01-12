@@ -18,6 +18,7 @@ import Courses from "./pages/Courses/Courses";
 import Students from "./pages/Students/Students";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "./context/AppContext";
+import Users from "./pages/Users/Users";
 function App() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -47,6 +48,7 @@ function App() {
       {ctx.isAuth&&  <Route path="/" element={<Dashboard />} />}
       {ctx.isAuth&&  <Route path="/courses" element={<Courses />} />}
       {ctx.isAuth&&  <Route path="/students" element={<Students />} />}
+      {ctx.isAuth&ctx?.user?.role==="SUPER_ADMIN"&&  <Route path="/users" element={<Users />} />}
       {ctx.isAuth&&  <Route path="/settings/:id" element={<AddEditUser/>} />}
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>

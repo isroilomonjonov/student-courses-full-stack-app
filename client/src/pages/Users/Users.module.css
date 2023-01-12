@@ -1,0 +1,71 @@
+.statistics {
+    width: 100%;
+    margin-top:5rem;
+  gap: 2rem;
+  background: #ffffff;
+  box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+  border-radius: 30px;
+  padding: 2rem 1.5rem;
+}
+.container {
+  display: flex;
+  gap: 2rem;
+}
+.svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 89.36px;
+  height: 84.88px;
+  left: 330px;
+  top: 147px;
+
+  background: linear-gradient(201.18deg, #d3ffe7 3.14%, #effff6 86.04%);
+  border-radius: 50%;
+}
+.svg[id="1"] {
+  background: linear-gradient(201.18deg, #ffa3cf 3.14%, #ffd5f3 86.04%);
+}
+
+.formControl {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+.searchSvg {
+  position: absolute;
+  top: 0.6rem;
+  left: 1rem;
+}
+.divSearchAndH2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.divSearchAndH2 h2{
+    font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+letter-spacing: -0.01em;
+color: #000000;
+}
+.text p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.01em;
+
+  color: #acacac;
+}
+.text h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+
+  color: #333333;
+}

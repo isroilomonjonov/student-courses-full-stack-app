@@ -76,17 +76,17 @@ function Sidebar(props) {
           </Link>
 
           <>
-            {/* <Link
-              to={"/table"}
+          {ctx.user.role==="SUPER_ADMIN" && <Link
+              to={"/users"}
               className={`${styles.sidebarLink} ${
                 open ? styles.sidebarLinkOpen : styles.sidebarLinkClouse
-              } ${url==="/table"?styles.sidebarActive:""}`}
+              } ${url==="/users"?styles.sidebarActive:""}`}
             >
-              <Money classname={`${styles.sidebarLinkSvg} ${url==="/table"?styles.sidebarLinkActive:""}`} />
+              <Money classname={`${styles.sidebarLinkSvg} ${url==="/users"?styles.sidebarLinkActive:""}`} />
               <p className={`h6 ${!open ? styles.linkP_hidden : styles.linkP}`}>
-                Dars Jadvali
+                Foydalanuvchilar
               </p>
-            </Link> */}
+            </Link>}
 
             <Link
               to={`/settings/${ctx.user.id}`}

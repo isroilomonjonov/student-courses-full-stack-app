@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
   }
   const token = authHeader.slice(7)
   const user = jwt.verify(token, process.env.JWT_SECRET)
-  if (!user||!user.isVerified) {
+  if (!user) {
     return next(new AppError("Unauthorized", 401))
   }
   req.user = user

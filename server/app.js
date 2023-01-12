@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 app.use("/api/v1/students",authMiddleware,studentRoutes)
 app.use("/api/v1/courses",authMiddleware,coursesRouter)
-app.use("/api/v1/users",userRouter)
+app.use("/api/v1/users",authMiddleware,userRouter)
 app.use("/api/v1/auth", authRouter);
  app.all("*", (req, res, next) => {
   return next(new AppError(`${req.path} not exists`, 404))

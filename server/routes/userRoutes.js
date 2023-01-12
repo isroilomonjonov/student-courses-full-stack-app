@@ -12,6 +12,7 @@ router.get(
   "/verifyphonenumber/:vercode",
   userController.byVerifyCodeUserPhoneNumber
 );
+router.put('/:id', userController.updateUserStatus)
 router.get("/:id",userController.getById)
 router.get("/",userController.getAllUser)
 router.patch("/:id", userController.updateUser)

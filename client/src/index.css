@@ -370,3 +370,11 @@ a {
 .search:focus {
   width: 100%;
 }
+@media (max-width: 800px) {
+  .input{
+    width: 80%;
+  }
+  .button-9{
+    width: 80%;
+  }
+}
