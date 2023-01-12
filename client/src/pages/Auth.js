@@ -164,7 +164,7 @@ const Auth = (props) => {
         aria-label="Loading Spinner"
         data-testid="loader"
       />}
-           {!loader&&"Create Accaunt"}
+           {!loader&&"Ro'yxatdan O'tish"}
             </button>
           <button
           className="button-9"
@@ -173,7 +173,7 @@ const Auth = (props) => {
               navigate("/login");
             }}
           >
-            I Have Accaunt
+           Kirish
           </button>
         </form>
       {/* )}  */}

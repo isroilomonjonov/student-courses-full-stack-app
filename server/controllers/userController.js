@@ -4,18 +4,28 @@ const { validationResult } = require("express-validator")
 const AppError = require("../utils/AppError")
 const {Op}=require("sequelize")
 const QueryBuilder = require("../utils/QueryBuilder")
+const Users = require('../models/User')
 
 exports.getAllUser= catchAsyn( async (req, res, next) => {
-  const { page, size,search="",active} = req.query  
-
-  const allUser = await User.findAndCountAll({
-    offset: (page - 1) * size || 0,
-    limit: size || 100,
-    where:(active==="true"||active==="false")?{role:{[Op.not]:"SuperAdmin"},is_verified:{[Op.eq]:active},
-    [Op.or]:[{firstName: {[Op.iLike]: `%${search}%` }}, {lastName: { [Op.iLike]: `%${search}%` }}]}:
-    {role:{[Op.not]:"SuperAdmin"},[Op.or]:[{firstName: {[Op.iLike]: `%${search}%` }}, {lastName: { [Op.iLike]: `%${search}%` }}]}
-  }) 
-   allUser.totalPages = Math.ceil(allUser.count / size) || 0
+  const { id } = req.user;
+  const queryBuilder = new QueryBuilder(req.query)
+  
+  queryBuilder
+    .filter()
+    .paginate()
+    .limitFields()
+    .search(["first_name", "last_name","username"])
+    if (
+      !req.query.role ||
+      req.query.role === "SUPER_ADMIN"
+    ) {
+      queryBuilder.queryOptions.where.role = {
+        [Op.ne]: "SUPER_ADMIN",
+      };
+      queryBuilder.queryOptions.where.id = { [Op.ne]: id };
+    }
+  let allUser = await Users.findAndCountAll(queryBuilder.queryOptions)
+  allUser = queryBuilder.createPage(allUser)
   res.json({
     status: "success",
     message: "",
@@ -24,6 +34,23 @@ exports.getAllUser= catchAsyn( async (req, res, next) => {
     }
   })
 })
+
+exports.updateUserStatus = async (req, res) => {
+  const { id } = req.params
+  const byId = await Users.findByPk(id)
+  if (!byId) {
+   return next(new AppError("Bunday ID li Foydalanuvchi topilmadi"))
+  }
+  const updatedStudent = await byId.update(req.body)
+  res.json({
+    status: "success",
+    message: "Foydalanuvchi ma'lumotlari tahrirlandi",
+    data: {
+      updatedStudent
+    }
+  })
+}
+
 exports.byVerifyCodeUser= catchAsyn( async (req, res, next) => {
   const { vercode } = req.params
   const user=await User.findOne({where:{vericationCode:{[Op.eq]:vercode},isVerified:{[Op.eq]:false}}})

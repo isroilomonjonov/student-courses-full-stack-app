@@ -25,10 +25,6 @@ const Login = () => {
         data,
         method: "POST",
       });
-      if (!res.data.data.user.isVerified) {
-        toast.error("Verificatsiyadan O'ting");
-        return
-      }
       localStorage.setItem("token", res.data.data.user.token);
       localStorage.setItem("user",JSON.stringify(res.data.data.user));
       ctx.setAppData({
@@ -38,7 +34,6 @@ const Login = () => {
 			});
       navigate("/");
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
     }
     finally{
@@ -81,7 +76,7 @@ const Login = () => {
         aria-label="Loading Spinner"
         data-testid="loader"
       />}
-         {!loader&& "JOIN"}
+         {!loader&& "Kirish"}
           </button>
         <button
           type="button"
@@ -90,7 +85,7 @@ const Login = () => {
           }}
           className="button-9"
         >
-          Create Accaunt
+          Ro'yxatdan O'tmoq
         </button>
       </form>
     </div>

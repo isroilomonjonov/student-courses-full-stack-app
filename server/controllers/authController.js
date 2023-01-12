@@ -136,6 +136,9 @@ exports.login = catchAsyn(async (req, res, next) => {
   if (!passwordIsMatch) {
     return next(new AppError("Login yoki parol xato!", 400));
   }
+  if(!candidate.isVerified){
+    return next(new AppError("Siz Adminlar Tomonidan Bloklangansiz", 401))
+  }
   const payload = {
     id: candidate.id,
     firstName: candidate.firstName,

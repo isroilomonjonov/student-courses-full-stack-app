@@ -2,15 +2,29 @@ import { toast } from "react-toastify";
 import axiosInstance from "../utils/axios-instance";
 export const getUsers = async ({ page, size, search, active }) => {
   try {
-     const path = `?size=${size}&page=${page}${search ? `&search=${search}` : ""}${
-    active && `&active=${active}`
-  }`;
+     const path = `?size=${size}&page=${page}${search ? `&search=${search}` : ""}
+     `;
+    //  ${active && `&isVerified=${active}`}
   const res = await axiosInstance(`users${path}`);
   return {
-    users: res.data.data.allUser.rows,
-    pages: res.data.data.allUser.totalPages,
-    count: res.data.data.allUser.count,
+    users: res.data.data.allUser.content,
+    pages: res.data.data.allUser.pagination.allPagesCount,
+    count: res.data.data.allUser.pagination.allItemsCount,
   };
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+ 
+};
+export const changeStatusHandler = async ({ data,  id }) => {
+  try {
+     const res = await axiosInstance({
+    url:`/users/${id}` ,
+    method:"PUT",
+    data: {isVerified:data}
+  });
+  console.log(res);
+  return res.data;
   } catch (error) {
     toast.error(error.response.data.message)
   }
