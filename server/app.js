@@ -14,6 +14,10 @@ app.use("/api/v1/students",authMiddleware,studentRoutes)
 app.use("/api/v1/courses",authMiddleware,coursesRouter)
 app.use("/api/v1/users",authMiddleware,userRouter)
 app.use("/api/v1/auth", authRouter);
+app.use(express.static(__dirname + "/build"));
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/build/index.html");
+});
  app.all("*", (req, res, next) => {
   return next(new AppError(`${req.path} not exists`, 404))
 })
