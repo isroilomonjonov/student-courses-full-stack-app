@@ -117,25 +117,25 @@ class QueryBuilder {
 		};
 	}
 
-	#createOrderArray() {
-		const orderArr = this.queryParams.sort.split(",").map((i) => {
-			const orderItem = [];
-			const isDesc = i.startsWith("-");
-			orderItem[0] = isDesc  ?i.slice(1) : i;
-			orderItem[1] = isDesc  ?"desc" : "asc";
-			return orderItem;
-		});
-		return orderArr;
-	}
+	// #createOrderArray() {
+	// 	const orderArr = this.queryParams.sort.split(",").map((i) => {
+	// 		const orderItem = [];
+	// 		const isDesc = i.startsWith("-");
+	// 		orderItem[0] = isDesc  ?i.slice(1) : i;
+	// 		orderItem[1] = isDesc  ?"desc" : "asc";
+	// 		return orderItem;
+	// 	});
+	// 	return orderArr;
+	// }
 
-	sort() {
-		if (this.queryParams.sort)
-			this.queryOptions.order = this.#createOrderArray();
-		else {
-			this.queryOptions.order = [["createdAt", "desc"]];
-		}
-		return this;
-	}
+	// sort() {
+	// 	if (this.queryParams.sort)
+	// 		this.queryOptions.order = this.#createOrderArray();
+	// 	else {
+	// 		this.queryOptions.order = [["createdAt", "desc"]];
+	// 	}
+	// 	return this;
+	// }
 }
 
 module.exports = QueryBuilder;
