@@ -160,7 +160,7 @@ exports.updateCourseStatus = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
   const { id } = req.params;
   const byId = await Courses.findByPk(id);
-  if (byId?.userId !== req.user.id && req.user.userRole !== "SUPER_ADMIN") {
+  if (byId.userId !== req.user.id && req.user.userRole !== "SUPER_ADMIN") {
     return next(new AppError("Bu Kurs Bilan Amallar Bajara Olmaysiz"));
   }
   if (!byId) {
