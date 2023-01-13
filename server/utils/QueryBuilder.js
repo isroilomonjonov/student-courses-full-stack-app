@@ -63,7 +63,7 @@ class QueryBuilder {
 
 	limitFields() {
 		if (this.queryParams.fields.length > 0) {
-			const attributes = this.queryParams.fields?.split(",");
+			const attributes = this.queryParams.fields.split(",");
 			const newAttribute = attributes.filter((field) => field !== "");
 			if (newAttribute.length > 0) {
 				this.queryOptions.attributes = newAttribute;
@@ -121,8 +121,8 @@ class QueryBuilder {
 		const orderArr = this.queryParams.sort.split(",").map((i) => {
 			const orderItem = [];
 			const isDesc = i.startsWith("-");
-			orderItem[0] = isDesc ? i.slice(1) : i;
-			orderItem[1] = isDesc ? "desc" : "asc";
+			orderItem[0] = isDesc  ?i.slice(1) : i;
+			orderItem[1] = isDesc  ?"desc" : "asc";
 			return orderItem;
 		});
 		return orderArr;
