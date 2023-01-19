@@ -12,7 +12,6 @@ exports.getAllCourses = catchAsyn(async (req, res, next) => {
     .filter()
     .paginate()
     .limitFields()
-    .sort()
     .search(["name", "description"]);
   queryBuilder.queryOptions.include = [
     { model: Students, attributes: ["id"] },

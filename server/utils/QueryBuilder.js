@@ -62,7 +62,7 @@ class QueryBuilder {
     }
 
 	limitFields() {
-		if (this.queryParams.fields.length > 0) {
+		if (this.queryParams?.fields?.length > 0) {
 			const attributes = this.queryParams.fields.split(",");
 			const newAttribute = attributes.filter((field) => field !== "");
 			if (newAttribute.length > 0) {
