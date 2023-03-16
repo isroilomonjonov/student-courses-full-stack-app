@@ -192,14 +192,15 @@ const Courses = () => {
           borderRadius: ".5rem",
           color: "white",
           margin: "1rem",
+          cursor:'pointer'
+        }}
+        onClick={()=>{
+          navigate("/courses/new")
         }}
       >
-        <Link
-          style={{ textDecoration: "none", color: "black" }}
-          to="/courses/new"
-        >
+        <p>
           Kurs qo'shish
-        </Link>
+        </p>
       </button>
     </Layout>
   );

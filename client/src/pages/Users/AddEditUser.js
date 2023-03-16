@@ -105,9 +105,7 @@ const AddEditCourse = () => {
 
         <button className="button-23">Yangilash</button>
       </form>
-      <button className="button-64" onClick={() => navigate(-1)}>
-        ◀
-      </button>
+   
     </Layout>
   );
 };

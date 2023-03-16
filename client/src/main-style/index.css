@@ -6,24 +6,22 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 html {
   font-size: 62.5%;
-
 }
 
 /* p{
   color:red
 } */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -33,29 +31,27 @@ li {
   padding: 0;
 }
 
-
 .buttonGreen {
   padding: 5px;
   margin: 2px;
   font-size: 1.5rem;
   border-radius: 10px;
-  border:0.5px solid black;
-  background-color:#90ee90;
+  border: 0.5px solid black;
+  background-color: #90ee90;
   cursor: pointer;
 }
 .buttonRed {
-padding: 5px;
-margin: 2px;
-font-size: 1.5rem;
-border-radius: 10px;
-border:0.5px solid black;
-background-color:rgb(250, 113, 113);
-cursor: pointer;
+  padding: 5px;
+  margin: 2px;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: 0.5px solid black;
+  background-color: rgb(250, 113, 113);
+  cursor: pointer;
 }
 
 .loginPage {
-  background-color:
-    #1C75FB;
+  background-color: #44559f;
   height: 100vh;
 }
 
@@ -65,7 +61,6 @@ cursor: pointer;
   left: 0;
   bottom: 0;
   right: 0;
-  /* background-color: rgba(20, 20, 20, 0.89); */
   border-radius: 3px;
   padding: 70px 100px;
   height: 100vh;
@@ -78,7 +73,7 @@ cursor: pointer;
 
 .label {
   display: flex;
-  margin: 10
+  margin: 10;
 }
 
 a {
@@ -86,7 +81,7 @@ a {
 }
 
 .st {
-  color: #fff
+  color: #fff;
 }
 
 .ts {
@@ -97,23 +92,25 @@ a {
   display: inline-block;
   background-color: #111827;
   border: 1px solid transparent;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   flex: 0 0 auto;
-  font-family: Inter var, ui-sans-serif, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family: Inter var, ui-sans-serif, system-ui, -apple-system, system-ui,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
-  padding: .75rem 1.2rem;
+  padding: 0.75rem 1.2rem;
   margin: 0.5rem;
   text-align: center;
-  text-decoration: none #6B7280 solid;
+  text-decoration: none #6b7280 solid;
   text-decoration-thickness: auto;
-  transition-duration: .2s;
+  transition-duration: 0.2s;
   transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -132,7 +129,7 @@ a {
 
 @media (min-width: 768px) {
   .button-40 {
-    padding: .75rem 1.5rem;
+    padding: 0.75rem 1.5rem;
   }
 }
 
@@ -155,8 +152,8 @@ a {
   width: 50%;
   height: 50px;
   padding: 12px 16px;
-  background: #FFFFFF;
-  border: 2px solid #D9D9D9;
+  background: #ffffff;
+  border: 2px solid #d9d9d9;
   border-radius: 8px;
   margin-top: 20px;
 }
@@ -165,7 +162,6 @@ a {
   position: relative;
   height: 100%;
   width: 100%;
-  background-color: rgba(43, 69, 241, 0.989);
 }
 .form2 {
   position: relative;
@@ -178,7 +174,7 @@ a {
   /* background-color: rgba(20, 20, 20, 0.89); */
   border-radius: 3px;
   padding: 70px 100px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -195,15 +191,14 @@ a {
 }
 
 .welcome {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
   line-height: 48px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-
 
 .button-9 {
   appearance: button;
@@ -211,13 +206,15 @@ a {
   background-color: #f5f5f5;
   border-radius: 6px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #405cf5;
   cursor: pointer;
-  font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
+  font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue,
+    Ubuntu, sans-serif;
   font-size: 100%;
-  line-height: 1.30;
+  line-height: 1.3;
   margin: 12px 0 0;
   outline: none;
   overflow: hidden;
@@ -226,7 +223,7 @@ a {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all .2s, box-shadow .08s ease-in;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -240,19 +237,21 @@ a {
 }
 
 .button-9:focus {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
+    rgba(50, 151, 211, 0.3) 0 0 0 4px;
 }
 
 .button-70 {
   background-image: linear-gradient(#0dccea, #0d70ea);
   border: 0;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 15px;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   font-family: Montserrat, sans-serif;
-  font-size: .9em;
+  font-size: 0.9em;
   margin: 5px;
   padding: 10px 15px;
   text-align: center;
@@ -262,14 +261,15 @@ a {
 }
 
 .button-23 {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: 1px solid #222222;
   border-radius: 8px;
   box-sizing: border-box;
   color: #222222;
   cursor: pointer;
   display: inline-block;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
@@ -280,40 +280,40 @@ a {
   text-align: center;
   text-decoration: none;
   touch-action: manipulation;
-  transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+  transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+    transform 0.1s;
   user-select: none;
   -webkit-user-select: none;
   width: auto;
+  margin-top:1rem ;
 }
 
 .button-23:focus-visible {
   box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
-  transition: box-shadow .2s;
+  transition: box-shadow 0.2s;
 }
 
 .button-23:active {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border-color: #000000;
-  transform: scale(.96);
+  transform: scale(0.96);
 }
 
 .button-23:disabled {
-  border-color: #DDDDDD;
-  color: #DDDDDD;
+  border-color: #dddddd;
+  color: #dddddd;
   cursor: not-allowed;
   opacity: 1;
 }
 
-
-
 .button-64 {
   align-items: center;
-  background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
   border: 0;
   border-radius: 8px;
   box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   font-family: Phantomsans, sans-serif;
   font-size: 20px;
@@ -371,10 +371,10 @@ a {
   width: 100%;
 }
 @media (max-width: 800px) {
-  .input{
+  .input {
     width: 80%;
   }
-  .button-9{
+  .button-9 {
     width: 80%;
   }
 }

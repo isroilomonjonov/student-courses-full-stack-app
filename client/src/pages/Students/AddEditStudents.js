@@ -80,7 +80,7 @@ const AddEditStudents = () => {
           {...register("firstName")}
         />
         {console.log(errors)}
-        {errors.firstName && <p>{errors.firstName.message}</p>}
+        {errors.firstName && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.firstName.message}</p>}
         <label htmlFor="lastName"></label>
         <input
           className="input"
@@ -90,7 +90,7 @@ const AddEditStudents = () => {
           placeholder="Familiya"
           {...register("lastName")}
         />
-        {errors.lastName && <p>{errors.lastName.message}</p>}{" "}
+        {errors.lastName && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.lastName.message}</p>}{" "}
         <input
           className="input"
           id="phoneNumber"
@@ -99,7 +99,7 @@ const AddEditStudents = () => {
           placeholder="Telefon Raqam"
           {...register("phoneNumber")}
         />
-        {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}{" "}
+        {errors.phoneNumber && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.phoneNumber.message}</p>}{" "}
         <label htmlFor="payment"></label>
         <input
           className="input"
@@ -109,7 +109,7 @@ const AddEditStudents = () => {
           placeholder="To'lov"
           {...register("payment")}
         />
-        {errors.payment && <p>{errors.payment.message}</p>}
+        {errors.payment && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.payment.message}</p>}
         <label htmlFor="birthDay">
           <h3>Tug'ilgan Yili</h3>
         </label>
@@ -121,7 +121,7 @@ const AddEditStudents = () => {
           style={{ margin: 0 }}
           {...register("birthDay")}
         />
-        {errors.birthDay && <p>{errors.birthDay.message}</p>}
+        {errors.birthDay && <p  style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.birthDay.message}</p>}
         <label htmlFor="func" className="form_label">
           <h3>Kursni Tanlang</h3>
         </label>
@@ -134,15 +134,12 @@ const AddEditStudents = () => {
               </option>
             ))}
         </select>
-        {errors.func && <p style={{ color: "red" }}> {errors.func.message}</p>}
+        {errors.func && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}> {errors.func.message}</p>}
         <button className="button-23">
           {" "}
           {isUpdate ? "O'quvchi Malumotlarini Yangilash" : "O'quvchi Yaratmoq"}
         </button>
       </form>
-      <button type="primery" className="button-64" onClick={() => navigate(-1)}>
-        ◀
-      </button>
     </Layout>
   );
 };
