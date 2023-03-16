@@ -11,8 +11,8 @@ export function ChartPie(props) {
     labels: props.data.label,
     datasets: [
       {
-        label: '# of Votes',
-        data:props.data.value,
+        label: 'soni',
+        data:props.data.value ,
         backgroundColor: [
           'rgba(255, 206, 86, 0.2)',
           'rgba(255, 99, 132, 0.2)',

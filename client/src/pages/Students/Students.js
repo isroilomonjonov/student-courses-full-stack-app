@@ -55,7 +55,7 @@ const Students = () => {
   };
   const deleteHandler = async (id) => {
     await deleteStudent(id);
-    getAllStudent({ page, size, search, courseId });
+    getAllStudents({ page, size, search, courseId });
   };
   const changeHandler = (e) => {
     setSearchVal(e.target.value);
@@ -162,9 +162,13 @@ const Students = () => {
           borderRadius: ".5rem",
           color: "white",
           margin: "1rem",
+          cursor:'pointer'
+        }}
+        onClick={()=>{
+          navigate("/students/new")
         }}
       >
-        <Link to="/students/new">O'quvchi qo'shish</Link>
+        <p>O'quvchi qo'shish</p>
       </button>
     </Layout>
   );

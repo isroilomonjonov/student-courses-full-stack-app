@@ -47,7 +47,7 @@ const AddEditCourse = () => {
             required: { value: true, message: "Kurs Nomini Kiriting" },
           })}
         />
-        {errors.name && <p style={{fontSize:"1.5rem",color:"red"}}>{errors.name.message}</p>}
+        {errors.name && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.name.message}</p>}
         <label htmlFor="description"></label>
         <input
           className="input"
@@ -58,15 +58,9 @@ const AddEditCourse = () => {
             required: { value: true, message: "Kurs Tavsifini Kiriting" },
           })}
         />
-        {errors.description && <p style={{fontSize:"1.5rem",color:"red"}}>{errors.description.message}</p>}
+        {errors.description && <p style={{fontSize:"1.5rem",color:"red",paddingTop:'5px'}}>{errors.description.message}</p>}
         <button className="button-23">{isUpdate ? "Update" : "Create"}</button>
       </form>
-      <button
-         className="button-64"
-        onClick={() => navigate(-1)}
-      >
-        ◀
-      </button>
     </Layout>
   );
 };

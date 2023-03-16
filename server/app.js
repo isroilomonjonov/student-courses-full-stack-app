@@ -18,7 +18,7 @@ app.use(express.static(__dirname + "/build"));
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
 });
- app.all("*", (req, res, next) => {
+app.all("*", (req, res, next) => {
   return next(new AppError(`${req.path} not exists`, 404))
 })
 app.use(errorController)
