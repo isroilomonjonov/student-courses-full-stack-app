@@ -160,7 +160,7 @@ const Courses = () => {
                       })
                     }
                   >
-                    Kusrni Yakunlash
+                    Kursni Yakunlash
                   </button>
                 </div>
                 <p className={styles.p} style={{ color: "black" }}>
