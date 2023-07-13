@@ -101,7 +101,7 @@ const Users = () => {
       <div className={styles.statistics}>
         <div className={styles.divSearchAndH2}>
           <h2>
-            {courseId ? "Kurs Bo'yicha O'quvchilar" : "Hamma O'quvchilar"}
+            Barcha Foydalanuvchilar
           </h2>
           <div className={styles.formControl}>
             <Input  onChange={changeHandler} style={{ paddingLeft: "4rem" }} placeholder="Qidiruv" />

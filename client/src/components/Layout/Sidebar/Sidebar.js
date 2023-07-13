@@ -83,7 +83,7 @@ function Sidebar(props) {
               }`}
             />
             <p className={`h6 ${!open ? styles.linkP_hidden : styles.linkP}`}>
-              O'quvchilar
+              Talabalar
             </p>
           </Link>
           <Link
