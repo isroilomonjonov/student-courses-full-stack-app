@@ -12,8 +12,7 @@ exports.getAllPayments = catchAsync(async (req, res, next) => {
     ...queryBuilder.queryOptions,
     where: { ...queryBuilder.queryOptions.where, userId: req.user.id },
   });
-  let allPayments1 = await Payment.findAndCountAll();
-  console.log(allPayments);
+  let allPayments1 = await Payment.findAndCountAll({where:{userId: req.user.id}});
   let acc1 = 0;
   for (let i = 0; i < allPayments1?.rows?.length; i++) {
     acc1 += allPayments1.rows[i].price;
