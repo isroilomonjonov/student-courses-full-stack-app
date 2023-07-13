@@ -27,7 +27,6 @@ const AddEditCourse = () => {
       getCourseById({ id: params.id, reset });
     }
   }, []);
-
   return (
     <Layout>
       <h1 style={{textAlign: "center"}}>{isUpdate ? "Kursni Yangilash" : "Kurs Yaratmoq"}</h1>
@@ -61,12 +60,6 @@ const AddEditCourse = () => {
         {errors.description && <p style={{fontSize:"1.5rem",color:"red"}}>{errors.description.message}</p>}
         <button className="button-23">{isUpdate ? "Update" : "Create"}</button>
       </form>
-      <button
-         className="button-64"
-        onClick={() => navigate(-1)}
-      >
-        ◀
-      </button>
     </Layout>
   );
 };

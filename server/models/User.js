@@ -1,66 +1,71 @@
-const { DataTypes} = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
 const Courses = require("./Courses");
+const Students = require("./Students");
+const Payment = require("./Payments");
 const Users = sequelize.define(
   "users",
   {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [6],
-            msg: "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
-          }
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [6],
+          msg: "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
+        },
+      },
     },
-    phoneNumber:{
-    type: DataTypes.STRING,
-    allowNull: false
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     vericationCode: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     vericationCodeByPhone: {
       type: DataTypes.STRING,
-      defaultValue:`${ Math.floor(1000 + Math.random() * 9000)}`
+      defaultValue: `${Math.floor(1000 + Math.random() * 9000)}`,
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
     },
     role: {
-      type: DataTypes.ENUM(["SUPER_ADMIN","ADMIN"]),
-      defaultValue:"ADMIN"
-    }
+      type: DataTypes.ENUM(["SUPER_ADMIN", "ADMIN"]),
+      defaultValue: "ADMIN",
+    },
   },
   {
     underscored: true,
   }
 );
-Users.hasMany(Courses)
-Courses.belongsTo(Users)
-
+Users.hasMany(Courses);
+Courses.belongsTo(Users);
+Users.hasMany(Students);
+Students.belongsTo(Users);
+Users.hasMany(Payment);
+Payment.belongsTo(Users);
 module.exports = Users;

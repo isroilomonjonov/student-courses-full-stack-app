@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout/Layout";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,21 +12,20 @@ import {
   submit,
 } from "../../api/students-api";
 import * as yup from "yup";
+import AppContext from "../../context/AppContext";
 const schema = yup.object().shape({
-  firstName: yup.string().required("FirstName kriting"),
-  lastName: yup.string().required("LastName kriting"),
+  firstName: yup.string().required("Ism kriting!"),
+  lastName: yup.string().required("Familiya kriting!"),
   birthDay: yup
     .date()
     .required("birtDate kriting")
     .min("1950-01-01", "Date is too early"),
-  courseId: yup.string(),
-  payment: yup.string(),
-  phoneNumber: yup.string(),
+  phoneNumber: yup.string().required("Telefon raqam kriting!"),
 });
 
 const AddEditStudents = () => {
   const { send: formSubmit } = useHttp(submit);
-  const { send: getCourses, data: allCourses } = useHttp(getAllCourses);
+  const { send: getCourses} = useHttp(getAllCourses);
   const { send: createByCourseId } = useHttp(createCourseById);
   const { send: studentById } = useHttp(studentsById);
   let [searchParams] = useSearchParams();
@@ -47,9 +46,8 @@ const AddEditStudents = () => {
     if (isUpdate) {
       (async () => {
         await getCourses();
-        await   studentById({ id: params.id, reset });
+        await studentById({ id: params.id, reset });
       })();
-    
     }
     if (query) {
       (async () => {
@@ -58,17 +56,23 @@ const AddEditStudents = () => {
       })();
     }
   }, []);
-
+  const ctx = useContext(AppContext);
   return (
     <Layout>
       <h1 style={{ textAlign: "center" }}>
         {isUpdate ? "O'quvchi Malumotlarini Yangilash" : "O'quvchi Yaratmoq"}
       </h1>
-
       <form
         className="form2"
         onSubmit={handleSubmit((data) =>
-          formSubmit({ data: data, isUpdate, id: params.id, query, navigate })
+          formSubmit({
+            data: data,
+            isUpdate,
+            id: params.id,
+            query,
+            navigate,
+            userId: ctx.user.id,
+          })
         )}
       >
         <label htmlFor="text"></label>
@@ -80,7 +84,11 @@ const AddEditStudents = () => {
           {...register("firstName")}
         />
         {console.log(errors)}
-        {errors.firstName && <p>{errors.firstName.message}</p>}
+        {errors.firstName && (
+          <p style={{ color: "red", fontSize: "16px" }}>
+            {errors.firstName.message}
+          </p>
+        )}
         <label htmlFor="lastName"></label>
         <input
           className="input"
@@ -90,7 +98,11 @@ const AddEditStudents = () => {
           placeholder="Familiya"
           {...register("lastName")}
         />
-        {errors.lastName && <p>{errors.lastName.message}</p>}{" "}
+        {errors.lastName && (
+          <p style={{ color: "red", fontSize: "16px" }}>
+            {errors.lastName.message}
+          </p>
+        )}
         <input
           className="input"
           id="phoneNumber"
@@ -99,17 +111,11 @@ const AddEditStudents = () => {
           placeholder="Telefon Raqam"
           {...register("phoneNumber")}
         />
-        {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}{" "}
-        <label htmlFor="payment"></label>
-        <input
-          className="input"
-          id="payment"
-          type="text"
-          style={{ marginBottom: 10 }}
-          placeholder="To'lov"
-          {...register("payment")}
-        />
-        {errors.payment && <p>{errors.payment.message}</p>}
+        {errors.phoneNumber && (
+          <p style={{ color: "red", fontSize: "16px" }}>
+            {errors.phoneNumber.message}
+          </p>
+        )}
         <label htmlFor="birthDay">
           <h3>Tug'ilgan Yili</h3>
         </label>
@@ -121,28 +127,16 @@ const AddEditStudents = () => {
           style={{ margin: 0 }}
           {...register("birthDay")}
         />
-        {errors.birthDay && <p>{errors.birthDay.message}</p>}
-        <label htmlFor="func" className="form_label">
-          <h3>Kursni Tanlang</h3>
-        </label>
-        <select name="func" {...register(`courseId`)}>
-          <option value=""></option>
-          {allCourses &&
-            allCourses.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-        </select>
-        {errors.func && <p style={{ color: "red" }}> {errors.func.message}</p>}
-        <button className="button-23">
+        {errors.birthDay && (
+          <p style={{ color: "red", fontSize: "16px" }}>
+            Tug'ilgan kunini kiriting!
+          </p>
+        )}
+        <button style={{ marginTop: "1rem" }} className="button-23">
           {" "}
           {isUpdate ? "O'quvchi Malumotlarini Yangilash" : "O'quvchi Yaratmoq"}
         </button>
       </form>
-      <button type="primery" className="button-64" onClick={() => navigate(-1)}>
-        ◀
-      </button>
     </Layout>
   );
 };

@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Students.module.css";
-import AppContext from "../../context/AppContext";
 import Input from "../../components/Input/Input";
 import SearchIcon from "../../assets/Icons/SearchIcon";
 import BasicTable from "../../components/Table/BasicTable";
@@ -11,32 +10,24 @@ import StudentStatisticsCom from "../../components/UI/StudentStatistics/StudentS
 import {
   changeStatusHandler,
   getStudents,
-  deleter,
 } from "../../api/students-api";
 import useHttp from "../../hooks/use-http";
 import Pagination from "../../components/UI/Pagination";
-
 const Students = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
   const size = searchParams.get("size") || 15;
-  const courseId = searchParams.get("courseId");
   const search = searchParams.get("search");
-
   const [searchVal, setSearchVal] = useState(null);
   const navigate = useNavigate();
   const {
     send: getAllStudents,
-    error,
-    loading,
     data: value,
   } = useHttp(getStudents);
-  const { send: getAllStudent } = useHttp(getStudents);
-  const { send: deleteStudent } = useHttp(deleter);
   const { send: changeStatusStudent } = useHttp(changeStatusHandler);
   useEffect(() => {
-    getAllStudents({ page, size, search, courseId });
-  }, [page, size, search, courseId]);
+    getAllStudents({ page, size, search });
+  }, [page, size, search]);
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate(
@@ -51,11 +42,7 @@ const Students = () => {
   }, [searchVal]);
   const changeStatusStudent2 = async ({ status, id }) => {
     await changeStatusStudent({ data: status, id: id });
-    getAllStudents({ page, size, search, courseId });
-  };
-  const deleteHandler = async (id) => {
-    await deleteStudent(id);
-    getAllStudent({ page, size, search, courseId });
+    getAllStudents({ page, size, search });
   };
   const changeHandler = (e) => {
     setSearchVal(e.target.value);
@@ -73,20 +60,9 @@ const Students = () => {
       },
     },
     {
-      id: "Yonalish",
-      Header: "Yo'nalish",
-      accessor: "course.name",
-    },
-    {
       id: "TelefonRaqam",
       Header: "Telefon Raqam",
       accessor: "phoneNumber",
-    },
-    {
-      Header: "To'lov",
-      accessor: (s) => {
-        return <p>{s.payment?.toLocaleString("Ru-Ru")} sum</p>;
-      },
     },
     {
       id: "Amallar",
@@ -94,19 +70,6 @@ const Students = () => {
       accessor: (student) => (
         <div>
           <Link to={`/students/${student.id}`}>📝</Link>
-          <button
-            style={{
-              padding: "5px",
-              margin: "2px",
-              fontSize: "20px",
-              backgroundColor: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
-            onClick={deleteHandler.bind(null, student.id)}
-          >
-            🗑
-          </button>
         </div>
       ),
     },
@@ -131,7 +94,7 @@ const Students = () => {
       <div className={styles.statistics}>
         <div className={styles.divSearchAndH2}>
           <h2>
-            {courseId ? "Kurs Bo'yicha O'quvchilar" : "Hamma O'quvchilar"}
+            Barcha Talabalar
           </h2>
           <div className={styles.formControl}>
             <Input  onChange={changeHandler} style={{ paddingLeft: "4rem" }} placeholder="Qidiruv" />
@@ -153,7 +116,6 @@ const Students = () => {
           )}
         </div>
       </div>
-
       <button
         style={{
           padding: "1.5rem",

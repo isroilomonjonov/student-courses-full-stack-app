@@ -12,9 +12,9 @@ class QueryBuilder {
 
     filter(){
      const filterFields = {...this.queryParams}
-     excludeParams?.forEach(p=>delete filterFields[p])
+     excludeParams.forEach(p=>delete filterFields[p])
      const filterObject = {};
-     Object.keys(filterFields)?.forEach(k=>{
+     Object.keys(filterFields).forEach(k=>{
         const filterItem = filterFields[k]
         if(typeof filterItem === "object"){
             Object.keys(filterItem).forEach((ik)=>{
@@ -62,8 +62,8 @@ class QueryBuilder {
     }
 
 	limitFields() {
-		if (this.queryParams?.fields?.length > 0) {
-			const attributes = this.queryParams.fields.split(",");
+		if (this.queryParams.fields?.length > 0) {
+			const attributes = this.queryParams.fields?.split(",");
 			const newAttribute = attributes.filter((field) => field !== "");
 			if (newAttribute.length > 0) {
 				this.queryOptions.attributes = newAttribute;
@@ -74,15 +74,15 @@ class QueryBuilder {
 	}
 
 	paginate() {
-		const page = (this.queryParams?.page || 1);
-		const limit = (this.queryParams?.size || 500);
+		const page = (this.queryParams.page ||= 1);
+		const limit = (this.queryParams.size ||= 500);
 		this.queryOptions.limit = limit;
 		this.queryOptions.offset = (page - 1) * limit;
 		return this;
 	}
 
 	search(searchFields) {
-		if (!this.queryParams?.search) return this;
+		if (!this.queryParams.search) return this;
 		const searchObj = {
 			[Op.or]: searchFields.map((field) => ({
 				[field]: { [Op.iLike]: `%${this.queryParams.search}%` },
@@ -97,7 +97,7 @@ class QueryBuilder {
 	}
 
 	createPage(queryResult) {
-		if (!queryResult?.count && !queryResult.rows) return queryResult;
+		if (!queryResult.count && !queryResult.rows) return queryResult;
 
 		const allPagesCount = Math.ceil(
 			queryResult.count / this.queryOptions.limit
@@ -117,25 +117,25 @@ class QueryBuilder {
 		};
 	}
 
-	// #createOrderArray() {
-	// 	const orderArr = this.queryParams.sort.split(",").map((i) => {
-	// 		const orderItem = [];
-	// 		const isDesc = i.startsWith("-");
-	// 		orderItem[0] = isDesc  ?i.slice(1) : i;
-	// 		orderItem[1] = isDesc  ?"desc" : "asc";
-	// 		return orderItem;
-	// 	});
-	// 	return orderArr;
-	// }
+	#createOrderArray() {
+		const orderArr = this.queryParams.sort.split(",").map((i) => {
+			const orderItem = [];
+			const isDesc = i.startsWith("-");
+			orderItem[0] = isDesc ? i.slice(1) : i;
+			orderItem[1] = isDesc ? "desc" : "asc";
+			return orderItem;
+		});
+		return orderArr;
+	}
 
-	// sort() {
-	// 	if (this.queryParams.sort)
-	// 		this.queryOptions.order = this.#createOrderArray();
-	// 	else {
-	// 		this.queryOptions.order = [["createdAt", "desc"]];
-	// 	}
-	// 	return this;
-	// }
+	sort() {
+		if (this.queryParams.sort)
+			this.queryOptions.order = this.#createOrderArray();
+		else {
+			this.queryOptions.order = [["createdAt", "desc"]];
+		}
+		return this;
+	}
 }
 
 module.exports = QueryBuilder;

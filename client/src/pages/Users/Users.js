@@ -27,7 +27,6 @@ const Users = () => {
     loading,
     data: value,
   } = useHttp(getUsers);
-  console.log(value);
   const { send: changeStatusUser } = useHttp(changeStatusHandler);
   useEffect(() => {
     getAllUsers({ page, size, search});

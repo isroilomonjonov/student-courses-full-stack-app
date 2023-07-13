@@ -15,6 +15,7 @@ exports.getAllUser= catchAsyn( async (req, res, next) => {
     .paginate()
     .limitFields()
     .search(["first_name", "last_name","username"])
+    .sort();
     if (
       !req.query.role ||
       req.query.role === "SUPER_ADMIN"

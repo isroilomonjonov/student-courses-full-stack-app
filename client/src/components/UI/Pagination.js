@@ -8,7 +8,7 @@ const Pagination = ({ page, size, data, colorLink, path, courseId ,fields,search
     for (let index = 0; index < page; index++) {
       links.push(
         <Link
-          key={index + page}
+          key={index+1}
           className="btn-link"
           style={{
             color: +colorLink === index + 1 ? "red" : "",
@@ -29,6 +29,7 @@ const Pagination = ({ page, size, data, colorLink, path, courseId ,fields,search
      
       {data[path].length > 0 && [
         <button
+        key={data[path]}
         className="button-23"
           disabled={+page === 1 ? true : false}
           onClick={() =>

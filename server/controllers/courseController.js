@@ -6,20 +6,30 @@ const { validationResult } = require("express-validator");
 const AppError = require("../utils/AppError");
 const { Op } = require("sequelize");
 const QueryBuilder = require("../utils/QueryBuilder");
+const Enrollment = require("../models/Entrollment");
 exports.getAllCourses = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
-  queryBuilder
-    .filter()
-    .paginate()
-    .search(["name", "description"]);
+  queryBuilder.filter().paginate().search(["name", "description"]).sort();
   queryBuilder.queryOptions.include = [
-    { model: Students, attributes: ["id"] },
+    { model: Enrollment, attributes: ["id"] },
     { model: Users, attributes: ["id", "firstName", "lastName"] },
   ];
-  let allCourses = await Courses.findAndCountAll(queryBuilder.queryOptions);
-  let active = await Courses.findAll({ where: { status: true } });
-  let inActive = await Courses.findAll({ where: { status: false } });
-  let allStudents = await Students.findAll();
+  let allCourses = await Courses.findAll({
+    ...queryBuilder.queryOptions,
+    where: { ...queryBuilder.queryOptions.where, userId: req.user.id },
+  });
+  allCourses = {
+    count: allCourses.length,
+    rows: [...allCourses],
+  };
+  console.log(allCourses);
+  let active = await Courses.findAll({
+    where: { status: true, userId: req.user.id },
+  });
+  let inActive = await Courses.findAll({
+    where: { status: false, userId: req.user.id },
+  });
+  let allStudents = await Students.findAll({ where: { userId: req.user.id } });
   allCourses = queryBuilder.createPage(allCourses);
   res.json({
     status: "success",
@@ -33,12 +43,14 @@ exports.getAllCourses = catchAsyn(async (req, res, next) => {
   });
 });
 exports.getAllCoursesStatusTrue = catchAsyn(async (req, res, next) => {
-  let allCourses = await Courses.findAll({ where: { status: true } });
+  let allCourses = await Courses.findAll({
+    where: { status: true, userId: req.user.id },
+  });
   res.json({
     status: "success",
     message: "",
     data: {
-      allCourses
+      allCourses,
     },
   });
 });

@@ -1,4 +1,4 @@
-const { DataTypes} = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
 const Students = sequelize.define(
   "students",
@@ -6,7 +6,7 @@ const Students = sequelize.define(
     id: {
       primaryKey: true,
       autoIncrement: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     firstName: {
       type: DataTypes.STRING,
@@ -18,20 +18,14 @@ const Students = sequelize.define(
       allowNull: false,
       validate: {
         isAfter: "1900-01-01",
-        isBefore: "2020-01-01"
+        isBefore: "2020-01-01",
       },
     },
-    phoneNumber:{
+    phoneNumber: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    payment:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    status:{type:DataTypes.BOOLEAN,
-      defaultValue:true
-    }
+    status: { type: DataTypes.BOOLEAN, defaultValue: true },
   },
   {
     underscored: true,

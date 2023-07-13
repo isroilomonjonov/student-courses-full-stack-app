@@ -1,9 +1,3 @@
-.courses {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
-}
 .statistics {
   width: 100%;
   margin-top: 5rem;
@@ -15,9 +9,6 @@
 }
 .container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
   gap: 2rem;
 }
 .svg {
@@ -41,7 +32,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
+  font-size: 16px;
+  gap: 1rem;
 }
 
 .searchSvg {
@@ -49,66 +41,26 @@
   top: 0.6rem;
   left: 1rem;
 }
-.divH3AndH2 {
+.divSearchAndH2 {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap-reverse;
 }
-.divH3AndH2 h2 {
+.divSearchAndH2 h2 {
   font-weight: 600;
-  font-size: 32px;
+  font-size: 22px;
   line-height: 33px;
   letter-spacing: -0.01em;
   color: #000000;
 }
-.divH3AndH2 h3 {
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  color: #000000;
-}
-.flex {
-  padding-top: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.flex2 {
-  padding-top: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.flexcolumn {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-.groups {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.group {
-  margin-top: 1rem;
-  padding: 2rem;
-  height: 221.07px;
-  background: #fee4cb;
-  border-radius: 25px;
-}
-.groupInActive {
-  background: #4746461e;
-}
-.p {
+.text p {
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.01em;
 
-  color: #474646;
+  color: #acacac;
 }
 .text h2 {
   font-style: normal;
@@ -118,12 +70,4 @@
   letter-spacing: -0.01em;
 
   color: #333333;
-}
-@media (max-width: 655px) {
-  .flex {
-    display: block;
-  }
-  .formControl {
-    width: 100%;
-  }
 }

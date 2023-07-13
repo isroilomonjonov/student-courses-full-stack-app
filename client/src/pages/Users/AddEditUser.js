@@ -33,7 +33,7 @@ const AddEditCourse = () => {
         )}
         className="form2"
       >
-        <label for="text"></label>
+        <label htmlFor="text"></label>
         <input
           id="text"
           className="input"
@@ -44,7 +44,7 @@ const AddEditCourse = () => {
           })}
         />
         {errors.firstName && <p>{errors.firstName.message}</p>}
-        <label for="text"></label>
+        <label htmlFor="text"></label>
         <input
           id="text"
           className="input"
@@ -55,7 +55,7 @@ const AddEditCourse = () => {
           })}
         />
         {errors.lastName && <p>{errors.lastName.message}</p>}
-        <label for="text"></label>
+        <label htmlFor="text"></label>
         <input
           id="text"
           className="input"
@@ -69,7 +69,7 @@ const AddEditCourse = () => {
           })}
         />
         {errors.username && <p>{errors.username.message}</p>}
-        <label for="password"></label>
+        <label htmlFor="password"></label>
         <input
           id="password"
           className="input"
@@ -80,7 +80,7 @@ const AddEditCourse = () => {
           })}
         />
         {errors.password && <p>{errors.password.message}</p>}
-        <label for="email"></label>
+        <label htmlFor="email"></label>
         <input
           id="email"
           className="input"
@@ -91,7 +91,7 @@ const AddEditCourse = () => {
           })}
         />
         {errors.email && <p>{errors.email.message}</p>}
-        <label for="phoneNumber"></label>
+        <label htmlFor="phoneNumber"></label>
         <input
           id="phoneNumber"
           className="input"
