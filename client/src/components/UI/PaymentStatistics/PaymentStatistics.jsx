@@ -29,7 +29,16 @@ const PaymentStatistics = ({ value }) => {
             <Dollar />
           </div>
           <div className={styles.text}>
-            <p className={styles.p}>To'langan barcha summa</p>
+            <p className={styles.p}>Ko'rinib turgan to'lovlardagi summa</p>
+            <h2> {value?.priceNow?.toLocaleString("Ru-Ru") || 0} sum</h2>
+          </div>
+        </div>
+        <div className={styles.container}>
+          <div className={styles.svg}>
+            <Dollar />
+          </div>
+          <div className={styles.text}>
+            <p className={styles.p}>Barcha to'langan summa</p>
             <h2> {value?.allPrice?.toLocaleString("Ru-Ru") || 0} sum</h2>
           </div>
         </div>

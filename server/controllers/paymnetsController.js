@@ -18,6 +18,10 @@ exports.getAllPayments = catchAsync(async (req, res, next) => {
     acc1 += allPayments1.rows[i].price;
   }
   const acc = allPayments1.rows.slice(-1)[0].price;
+  let accNow=0;
+  for (let i = 0; i < allPayments?.rows?.length; i++) {
+    accNow += allPayments.rows[i].price;
+  }
   allPayments = queryBuilder.createPage(allPayments);
 
   res.json({
@@ -27,6 +31,7 @@ exports.getAllPayments = catchAsync(async (req, res, next) => {
       allPayments,
       price: acc,
       allPrice: acc1,
+      accNow
     },
   });
 });

@@ -14,6 +14,7 @@ export const getAllPayments = async ({ size, page, search, gte, lte }) => {
       count: res.data.data.allPayments.pagination.allItemsCount,
       price: res.data.data.price,
       allPrice: res.data.data.allPrice,
+      priceNow: res.data.data.accNow,
     };
   } catch (error) {
     toast.error(error.response.data.message);
