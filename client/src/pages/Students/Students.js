@@ -65,6 +65,23 @@ const Students = () => {
       accessor: "phoneNumber",
     },
     {
+      id: "CreatedAt",
+      Header: "CreatedAt",
+      accessor: (s) => {
+        return (
+          <p>
+            {new Date(s.createdAt).toLocaleString("uz-Uz", {
+              hour: "2-digit",
+              minute: "2-digit",
+              day: "2-digit",
+              year: "numeric",
+              month: "2-digit",
+            })}
+          </p>
+        );
+      },
+    },
+    {
       id: "Amallar",
       Header: "Amallar",
       accessor: (student) => (

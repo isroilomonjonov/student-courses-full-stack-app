@@ -19,10 +19,7 @@ const Payment = () => {
   const [searchVal, setSearchVal] = useState(null);
   const navigate = useNavigate();
   const { send: getAllPaymentData, data: value } = useHttp(getAllPayments);
-  const {
-    register,
-    handleSubmit,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   useEffect(() => {
     getAllPaymentData({ page, size, search });
   }, [page, size, search]);
@@ -65,6 +62,23 @@ const Payment = () => {
       Header: "To'lov",
       accessor: (s) => {
         return <p>{s.price?.toLocaleString("Ru-Ru")} sum</p>;
+      },
+    },
+    {
+      id: "CreatedAt",
+      Header: "CreatedAt",
+      accessor: (s) => {
+        return (
+          <p>
+            {new Date(s.createdAt).toLocaleString("uz-Uz", {
+              hour: "2-digit",
+              minute: "2-digit",
+              day: "2-digit",
+              year: "numeric",
+              month: "2-digit",
+            })}
+          </p>
+        );
       },
     },
     {
