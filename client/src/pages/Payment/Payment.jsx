@@ -66,7 +66,7 @@ const Payment = () => {
     },
     {
       id: "CreatedAt",
-      Header: "CreatedAt",
+      Header: "Yaratilgan vaqti",
       accessor: (s) => {
         return (
           <p>
