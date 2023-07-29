@@ -9,7 +9,7 @@ import AppContext from "../../context/AppContext";
 import { getAllStudents, paymentById, submit } from "../../api/payment-api";
 import { getAllCourses } from "../../api/students-api";
 const schema = yup.object().shape({
-  studentId: yup.string().required("Talabani tanlang!"),
+  userId: yup.string().required("Talabani tanlang!"),
   courseId: yup.string().required("Kursni tanlang!"),
   price: yup.string().required("To'lov narxini kiriting"),
 });
@@ -54,9 +54,9 @@ const AddEditPayment = () => {
           formSubmit({
             data: data,
             id: params.id,
-            userId:ctx.user.id,
+            userId: ctx.user.id,
             navigate,
-            isUpdate
+            isUpdate,
           })
         )}
       >
@@ -99,7 +99,7 @@ const AddEditPayment = () => {
           className="input"
           style={{ marginTop: 0 }}
           name="func"
-          {...register(`studentId`)}
+          {...register(`userId`)}
         >
           <option value=""></option>
           {allStudents &&

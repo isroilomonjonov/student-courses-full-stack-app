@@ -1,23 +1,23 @@
 const Courses = require("../models/Courses");
 const Payment = require("../models/Payments");
-const Students = require("../models/Students");
 const QueryBuilder = require("../utils/QueryBuilder");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
+const Users = require("../models/User");
 exports.getAllPayments = catchAsync(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
   queryBuilder.filter().paginate().sort();
-  queryBuilder.queryOptions.include = [{ model: Courses }, { model: Students }];
+  queryBuilder.queryOptions.include = [{ model: Courses }, { model: Users }];
   let allPayments = await Payment.findAndCountAll({
     ...queryBuilder.queryOptions,
-    where: { ...queryBuilder.queryOptions.where, userId: req.user.id },
+    where: { ...queryBuilder.queryOptions.where, creatorId: req.user.id },
   });
-  let allPayments1 = await Payment.findAndCountAll({where:{userId: req.user.id}});
+  let allPayments1 = await Payment.findAndCountAll({where:{creatorId: req.user.id}});
   let acc1 = 0;
   for (let i = 0; i < allPayments1?.rows?.length; i++) {
     acc1 += allPayments1.rows[i].price;
   }
-  const acc = allPayments1.rows.slice(-1)[0].price;
+  const acc = allPayments1.rows.slice(-1)[0]?.price;
   let accNow=0;
   for (let i = 0; i < allPayments?.rows?.length; i++) {
     accNow += allPayments.rows[i].price;

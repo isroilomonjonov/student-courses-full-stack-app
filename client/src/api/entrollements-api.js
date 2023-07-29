@@ -6,20 +6,23 @@ export const getStudentsByCourseId = async (courseId) => {
     return {
       students: res.data.data.students,
       course: res.data.data.course,
+      teachers:res.data.data.teachers
     };
   } catch (error) {
     toast.error(error.response.data.message);
   }
 };
-export const submit = async ({ data, id, close,get }) => {
-  if(data?.students?.length===0){
+export const submit = async ({ data, id, close }) => {
+  if(data?.length===0){
     return
   }
+  
+
   try {
     const res = await axiosInstance({
       url: "/entrollement",
       method: "POST",
-      data: { students: [...data], courseId: id },
+      data: { users: typeof data==="object"?[...data]:[data], courseId: id },
     });
     close();
     return res.data;

@@ -17,10 +17,8 @@ const useHttp = (reqFn, startWithLoading = false) => {
     try {
       const data = await reqFn(reqData);
       setData(data);
-      // console.log(data);
-
       if (data && data.message) {
-        toast.success(data.message);
+        toast.success(data?.message);
       }
     } catch (error) {
       console.log(error);

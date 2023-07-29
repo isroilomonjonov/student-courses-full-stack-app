@@ -2,9 +2,9 @@ const { Op } = require("sequelize");
 const Enrollment = require("../models/Entrollment");
 const catchAsync = require("../utils/catchAsync");
 const QueryBuilder = require("../utils/QueryBuilder");
-const Students = require("../models/Students");
 const Courses = require("../models/Courses");
 const AppError = require("../utils/AppError");
+const Users = require("../models/User");
 
 exports.getAllEnrollment = catchAsync(async (req, res, next) => {
   let allEnrollment = await Enrollment.findAndCountAll();
@@ -19,15 +19,23 @@ exports.getAllEnrollment = catchAsync(async (req, res, next) => {
 exports.getAllEnrollmentByCourseId = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const queryBuilder = new QueryBuilder(req.query);
-  queryBuilder.queryOptions.include = [{ model: Students }, { model: Courses }];
+  queryBuilder.queryOptions.include = [{ model: Users }];
   let allEnrollment = await Enrollment.findAll({
     ...queryBuilder.queryOptions,
     where: { courseId: { [Op.eq]: id } },
   });
   const course = await Courses.findByPk(id);
   const students = await allEnrollment.map((e) => {
-    return e.student;
-  });
+    if(e.user.role==="STUDENT"){
+      return e.user
+    }
+  }).filter(e=>e);
+  const teachers = await allEnrollment.map((e) => {
+    if(e.user.role==="TEACHER"){
+      return e.user
+    }
+  }).filter(e=>e);
+
 
   res.json({
     status: "success",
@@ -35,6 +43,7 @@ exports.getAllEnrollmentByCourseId = catchAsync(async (req, res, next) => {
     data: {
       course: course,
       students,
+      teachers
     },
   });
 });
@@ -46,14 +55,14 @@ exports.createEnrollment = catchAsync(async (req, res, next) => {
       message: "Bu Kursga Talaba qo'shib bo'lmaydi",
     });
   }
-  const data = req.body.students.map((s) => {
+  const data = req.body.users.map((s) => {
     return {
       courseId: req.body.courseId,
-      studentId: s,
+      userId: s,
     };
   });
   const exists = await Enrollment.findAll({
-    where: { studentId: { [Op.in]: req.body.students } },
+    where: { userId: { [Op.in]: req.body.users } },
   });
   for (let i = 0; i < exists.length; i++) {
     console.log(exists[i]);
@@ -81,7 +90,7 @@ exports.createEnrollment = catchAsync(async (req, res, next) => {
 exports.deleteEntrollement = async (req, res, next) => {
   const { id } = req.params;
   const byId = await Enrollment.findOne({
-    where: { studentId: id, courseId: req.body.courseId },
+    where: { userId: id, courseId: req.body.courseId },
   });
 
   if (!byId) {

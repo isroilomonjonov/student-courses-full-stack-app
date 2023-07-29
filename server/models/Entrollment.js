@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
 const Courses = require("./Courses");
-const Students = require("./Students");
+const Users = require("./User");
 const Enrollment = sequelize.define(
   "Enrollment",
   {
@@ -15,10 +15,8 @@ const Enrollment = sequelize.define(
     underscored: true,
   }
 );
-Students.hasMany(Enrollment);
-Enrollment.belongsTo(Students);
+Users.hasMany(Enrollment);
+Enrollment.belongsTo(Users);
 Courses.hasMany(Enrollment);
 Enrollment.belongsTo(Courses);
 module.exports = Enrollment;
-// Students.belongsToMany(Courses, { through: Enrollment });
-// Courses.belongsToMany(Students, { through: Enrollment });

@@ -9,6 +9,7 @@ import Input from "../../components/Input/Input";
 import { getAllPayments } from "./../../api/payment-api";
 import { useForm } from "react-hook-form";
 import PaymentStatistics from "../../components/UI/PaymentStatistics/PaymentStatistics";
+import { phoneNumber } from "../../utils/phoneNumber";
 
 const Payment = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -35,7 +36,6 @@ const Payment = () => {
       clearTimeout(timer);
     };
   }, [searchVal]);
-
   const packageCols = [
     {
       id: "FIO",
@@ -43,7 +43,7 @@ const Payment = () => {
       accessor: (s) => {
         return (
           <p>
-            {s.student.firstName} {s.student.lastName}
+            {s.user.firstName} {s.user.lastName}
           </p>
         );
       },
@@ -51,7 +51,9 @@ const Payment = () => {
     {
       id: "TelefonRaqam",
       Header: "Telefon Raqam",
-      accessor: "student.phoneNumber",
+      accessor: (s)=>{
+        return phoneNumber(s.user.phoneNumber)
+      },
     },
     {
       id: "KursNomi",

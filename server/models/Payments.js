@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
 const Courses = require("./Courses");
-const Students = require("./Students");
+const Users = require("./User");
 const Payment = sequelize.define(
   "Payment",
   {
@@ -11,14 +11,12 @@ const Payment = sequelize.define(
       defaultValue: DataTypes.UUIDV4,
     },
     price: DataTypes.INTEGER,
+    creatorId:DataTypes.UUID
   },
   {
     underscored: true,
   }
 );
-Students.hasMany(Payment);
-Payment.belongsTo(Students);
 Courses.hasMany(Payment);
 Payment.belongsTo(Courses);
-// Courses.belongsToMany(Students, { through: Payment });
 module.exports = Payment;

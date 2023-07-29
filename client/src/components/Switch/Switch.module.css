@@ -1,5 +1,6 @@
 .toggleButton {
-  width: 5.3rem;
+  /* max-width: 5.3rem; */
+ width: 5.3rem;
   height: 2.8rem;
   border-radius: 15.5px;
   padding: 0.2rem;

@@ -1,8 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
 const Courses = require("./Courses");
-const Students = require("./Students");
 const Payment = require("./Payments");
+const Tests = require("./Tests");
+const Results = require("./Results");
 const Users = sequelize.define(
   "users",
   {
@@ -54,18 +55,23 @@ const Users = sequelize.define(
       defaultValue: true,
     },
     role: {
-      type: DataTypes.ENUM(["SUPER_ADMIN", "ADMIN"]),
+      type: DataTypes.ENUM(["SUPER_ADMIN", "ADMIN","STUDENT","TEACHER"]),
       defaultValue: "ADMIN",
     },
+    creatorId:DataTypes.UUID
   },
   {
     underscored: true,
   }
 );
+Users.hasMany(Tests);
+Tests.belongsTo(Users);
 Users.hasMany(Courses);
 Courses.belongsTo(Users);
-Users.hasMany(Students);
-Students.belongsTo(Users);
 Users.hasMany(Payment);
 Payment.belongsTo(Users);
+Users.hasMany(Payment);
+Payment.belongsTo(Users);
+Users.hasMany(Results)
+Results.belongsTo(Users);
 module.exports = Users;

@@ -95,9 +95,12 @@
 .group {
   margin-top: 1rem;
   padding: 2rem;
-  height: 221.07px;
+  height: 151.07px;
   background: #fee4cb;
   border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .groupInActive {
   background: #4746461e;

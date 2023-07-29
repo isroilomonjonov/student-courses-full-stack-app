@@ -18,7 +18,7 @@
     "react-icons": "^4.10.1",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-spinners": "^0.13.7",
     "react-table": "^7.8.0",
     "react-toastify": "^9.0.8",
@@ -49,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

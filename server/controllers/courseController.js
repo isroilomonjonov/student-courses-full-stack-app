@@ -1,6 +1,5 @@
 const Courses = require("../models/Courses");
 const Users = require("../models/User");
-const Students = require("../models/Students");
 const catchAsyn = require("../utils/catchAsync");
 const { validationResult } = require("express-validator");
 const AppError = require("../utils/AppError");
@@ -14,10 +13,23 @@ exports.getAllCourses = catchAsyn(async (req, res, next) => {
     { model: Enrollment, attributes: ["id"] },
     { model: Users, attributes: ["id", "firstName", "lastName"] },
   ];
-  let allCourses = await Courses.findAll({
-    ...queryBuilder.queryOptions,
-    where: { ...queryBuilder.queryOptions.where, userId: req.user.id },
-  });
+  let courses = await Enrollment.findAll({
+    where: { userId: req.user.id },
+  })
+  courses=courses.map((e)=>e.courseId)
+  let allCourses;
+  if (req.user.role === "STUDENT" || req.user.role === "TEACHER") {
+    allCourses = await Courses.findAll({
+      ...queryBuilder.queryOptions,
+      where: { ...queryBuilder.queryOptions.where, id: { [Op.in]: courses } },
+    });
+  } else {
+    allCourses = await Courses.findAll({
+      ...queryBuilder.queryOptions,
+      where: { ...queryBuilder.queryOptions.where, userId: req.user.id },
+    });
+  }
+
   allCourses = {
     count: allCourses.length,
     rows: [...allCourses],
@@ -29,7 +41,12 @@ exports.getAllCourses = catchAsyn(async (req, res, next) => {
   let inActive = await Courses.findAll({
     where: { status: false, userId: req.user.id },
   });
-  let allStudents = await Students.findAll({ where: { userId: req.user.id } });
+  if(req.user.role==="STUDENT"||req.user.role==="TEACHER"){
+    active=allCourses.rows.filter((c)=>c.status);
+    inActive=allCourses.rows.filter((c)=>c.status!==true);
+  }
+  console.log(active,inActive,"fgmkdgnkdngfnjfdngdfkjngjjfgnjkdjgnjkdfng");
+  let allStudents = await Users.findAll({ where: { creatorId: req.user.id } });
   allCourses = queryBuilder.createPage(allCourses);
   res.json({
     status: "success",
@@ -39,12 +56,13 @@ exports.getAllCourses = catchAsyn(async (req, res, next) => {
       active: active.length,
       inActive: inActive.length,
       allStudents: allStudents.length,
+      courses
     },
   });
 });
 exports.getAllCoursesStatusTrue = catchAsyn(async (req, res, next) => {
   let allCourses = await Courses.findAll({
-    where: { status: true, userId: req.user.id },
+    where: { userId: req.user.id },
   });
   res.json({
     status: "success",
@@ -54,19 +72,7 @@ exports.getAllCoursesStatusTrue = catchAsyn(async (req, res, next) => {
     },
   });
 });
-exports.byIdStudetns = catchAsyn(async (req, res, next) => {
-  const { id } = req.params;
-  const students = await Students.findAll({
-    where: { course_id: { [Op.eq]: id } },
-  });
-  res.status(201).json({
-    status: "success",
-    message: "",
-    data: {
-      students,
-    },
-  });
-});
+
 exports.getById = catchAsyn(async (req, res, next) => {
   const { id } = req.params;
   console.log(id);

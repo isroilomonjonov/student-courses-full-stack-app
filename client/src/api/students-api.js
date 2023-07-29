@@ -1,27 +1,25 @@
 import { toast } from "react-toastify";
 import http from "../utils/axios-instance";
 import axiosInstance from "../utils/axios-instance";
-import AppContext from "../context/AppContext";
-import { useContext } from "react";
 export const getStudents = async ({ page, size, courseId, search = "" }) => {
   try {
     const path = `?size=${size}&page=${page}${
       search ? `&search=${search}` : ""
     }`;
-    const res = await axiosInstance(`students${path}`);
+    const res = await axiosInstance(`/users/students${path}`);
     return {
-      students: res.data.data.allStudents.content,
-      pages: res.data.data.allStudents.pagination.allPagesCount,
-      count: res.data.data.allStudents.pagination.allItemsCount,
+      users: res.data.data.allUsers.content,
+      pages: res.data.data.allUsers.pagination.allPagesCount,
+      count: res.data.data.allUsers.pagination.allItemsCount,
     };
   } catch (error) {
     toast.error(error.response.data.message);
   }
 };
 
-export const getStudentsForCourse = async ({id,search}) => {
+export const getStudentsForCourse = async ({id,search,role}) => {
   try {
-    const res = await axiosInstance(`students/course/${id}${search?`?search=${search}`:''}`);
+    const res = await axiosInstance(`/users/students/course/${id}${search?`?search=${search}`:''}${role?`?role=${role}`:""}`);
     return {
       students: res.data.data.allStudents
     };
@@ -31,7 +29,7 @@ export const getStudentsForCourse = async ({id,search}) => {
 };
 export const getStudentsStatistics = async () => {
   try {
-    const res = await axiosInstance(`students/statistics`);
+    const res = await axiosInstance(`users/students/statistics`);
     return {
       active: res.data.data.active,
       inActive: res.data.data.inActive,
@@ -50,38 +48,18 @@ export const deleter = async ({id,get}) => {
     toast.error(error.response.data.message);
   }
 };
-export const submit = async ({
-  data,
-  isUpdate,
-  id,
-  query,
-  navigate,
-  userId,
-}) => {
-  try {
-    const res = await axiosInstance({
-      url: isUpdate ? `/students/${id}` : "/students",
-      method: isUpdate ? "PATCH" : "POST",
-      data: { ...data, userId: userId },
-    });
-    navigate("/students");
-    return res.data;
-  } catch (error) {
-    toast.error(error.response.data.message);
-  }
-};
-export const changeStatusHandler = async ({ data, id }) => {
-  try {
-    const res = await axiosInstance({
-      url: `/students/${id}`,
-      method: "PUT",
-      data: { status: data },
-    });
-    return res.data;
-  } catch (error) {
-    toast.error(error.response.data.message);
-  }
-};
+// export const changeStatusHandler = async ({ data, id }) => {
+//   try {
+//     const res = await axiosInstance({
+//       url: `/students/${id}`,
+//       method: "PUT",
+//       data: { status: data },
+//     });
+//     return res.data;
+//   } catch (error) {
+//     toast.error(error.response.data.message);
+//   }
+// };
 export const getAllCourses = async () => {
   try {
     const res = await http(`/courses/all`);

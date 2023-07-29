@@ -22,7 +22,7 @@ export const getAllPayments = async ({ size, page, search, gte, lte }) => {
 };
 export const getAllStudents = async () => {
   try {
-    const res = await axiosInstance(`/students/all`);
+    const res = await axiosInstance(`/users/all`);
     return res.data.data.allStudents;
   } catch (error) {
     toast.error(error.response.data.message);
@@ -44,7 +44,7 @@ export const submit = async ({ data, id, navigate, isUpdate, userId }) => {
     const res = await axiosInstance({
       url: isUpdate ? `/payments/${id}` : "/payments",
       method: isUpdate ? "PATCH" : "POST",
-      data: { ...data, userId: userId },
+      data: { ...data, creatorId: userId },
     });
     navigate("/payments");
     return res.data;

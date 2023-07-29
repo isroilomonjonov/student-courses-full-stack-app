@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/Layout/Layout";
 import styles from "./CoursesStudent.module.css";
 import Modal from "react-modal";
@@ -15,6 +15,10 @@ import {
 import { useForm } from "react-hook-form";
 import Input from "../../../components/Input/Input";
 import SearchIcon from "../../../assets/Icons/SearchIcon";
+import AppContext from "../../../context/AppContext";
+import Test from "../../../components/Test/Test";
+import Quiz from "../../Quiz/Quiz";
+import { phoneNumber } from "../../../utils/phoneNumber";
 const customStyles = {
   content: {
     top: "50%",
@@ -34,24 +38,24 @@ const CourseStudents = () => {
   const { send: getAllStudentsByCourseId, data: value } = useHttp(
     getStudentsByCourseId
   );
+  const ctx = useContext(AppContext);
   const { send: formSubmit } = useHttp(submit);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [searchVal, setSearchVal] = useState(null);
   const search = searchParams.get("search");
-  const { send: getAllStudentsForCourse, data: data } =
-    useHttp(getStudentsForCourse);
+  const { send: getAllStudentsForCourse, data } = useHttp(getStudentsForCourse);
   const { send: deleteEntrollement } = useHttp(deleteHandlar);
   useEffect(() => {
     getAllStudentsByCourseId(params.id);
   }, [params.id, open]);
   useEffect(() => {
-    getAllStudentsForCourse({ id: params.id, search });
+    (ctx.user.role!=="STUDENT"&&ctx.user.role!=="TEACHER")&& getAllStudentsForCourse({ id: params.id, search });
   }, [search]);
   useEffect(() => {
     reset();
     setSearchVal(null);
-    getAllStudentsForCourse({ id: params.id, search });
+    (ctx.user.role!=="STUDENT"&&ctx.user.role!=="TEACHER")&& getAllStudentsForCourse({ id: params.id, search, role: open });
   }, [open]);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -88,7 +92,9 @@ const CourseStudents = () => {
     {
       id: "TelefonRaqam",
       Header: "Telefon Raqam",
-      accessor: "phoneNumber",
+      accessor: (s)=>{
+       return phoneNumber(s.phoneNumber)
+      },
     },
     {
       id: "Amallar",
@@ -97,47 +103,75 @@ const CourseStudents = () => {
         <div>
           <button
             onClick={() => deleteHand({ id: student.id, courseId: params.id })}
-            style={{
-              padding: ".5rem 1rem",
-              cursor: "pointer",
-              backgroundColor: "red",
-              color: "white",
-            }}
+           className="deleteBTN"
           >
             Kursdan Chiqarib Tashlash
           </button>
+          
         </div>
       ),
     },
   ];
   return (
     <Layout>
-      <StudentStatisticsCom value={value} />
-      <div className={styles.statistics}>
-        <div className={styles.divSearchAndH2}>
-          <h2>{value?.course?.name} kursi talabalari</h2>
-        </div>
+      {(ctx.user.role!=="STUDENT"&&ctx.user.role!=="TEACHER")&&<StudentStatisticsCom value={value} />}
+      {ctx.user.role !== "STUDENT" && (
         <div>
-          {console.log(value)}
-          {value?.students?.length > 0 && (
-            <BasicTable columns={packageCols} data={value?.students} />
-          )}
+          <div className={styles.statistics}>
+            <div className={styles.divSearchAndH2}>
+              <h2>{value?.course?.name} kursi talabalari</h2>
+            </div>
+            <div>
+              {value?.students?.length > 0 && (
+                <BasicTable columns={packageCols} data={value?.students} />
+              )}
+            </div>
+          </div>
+          <button
+            style={{
+              padding: "1.5rem",
+              backgroundColor: "lightblue",
+              border: "none",
+              borderRadius: ".5rem",
+              color: "white",
+              margin: "1rem",
+              cursor: "pointer",
+            }}
+            onClick={() => setOpen("STUDENT")}
+          >
+            {value?.course?.name} kursiga talaba qo'shish
+          </button>
         </div>
-      </div>
-      <button
-        style={{
-          padding: "1.5rem",
-          backgroundColor: "lightblue",
-          border: "none",
-          borderRadius: ".5rem",
-          color: "white",
-          margin: "1rem",
-          cursor: "pointer",
-        }}
-        onClick={() => setOpen(true)}
-      >
-        {value?.course?.name} kursiga talaba qo'shish
-      </button>
+      )}
+      {ctx.user.role !== "TEACHER" && (
+        <div>
+          <div className={styles.statistics}>
+            <div className={styles.divSearchAndH2}>
+              <h2>{value?.course?.name} kursi o'qituvchilar</h2>
+            </div>
+            <div>
+              {value?.teachers?.length > 0 && (
+                <BasicTable columns={packageCols} data={value?.teachers} />
+              )}
+            </div>
+          </div>
+          <button
+            style={{
+              padding: "1.5rem",
+              backgroundColor: "lightblue",
+              border: "none",
+              borderRadius: ".5rem",
+              color: "white",
+              margin: "1rem",
+              cursor: "pointer",
+            }}
+            onClick={() => setOpen("TEACHER")}
+          >
+            {value?.course?.name} kursiga o'qituvchi qo'shish
+          </button>
+        </div>
+      )}
+      <Test/>
       <Modal
         isOpen={open}
         ariaHideApp={false}
@@ -168,11 +202,12 @@ const CourseStudents = () => {
           <div className={styles.formDiv}>
             {data?.students?.map((e) => (
               <label key={e.id} className={`${styles.label}`} for={e.id}>
+                {console.log(e)}
                 <input
                   type="checkbox"
                   id={e.id}
                   name="fav_language"
-                  value={e.id}
+                  value={`${e.id}`}
                   {...register(`students`)}
                 />
                 {e.firstName} {e.lastName} {e.phoneNumber}{" "}

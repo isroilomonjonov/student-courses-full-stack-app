@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
-const Students = require("./Students");
+const Tests = require("./Tests");
 const Courses = sequelize.define(
   "courses",
   {
@@ -20,4 +20,6 @@ const Courses = sequelize.define(
     underscored: true,
   }
 );
+Courses.hasMany(Tests)
+Tests.belongsTo(Courses)
 module.exports = Courses;

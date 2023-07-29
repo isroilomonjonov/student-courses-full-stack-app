@@ -20,10 +20,16 @@ const errorController = (err, req, res, next) => {
 
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
-  return res.json({
+  // res.json({
+  //   status: err.status,
+  //   message:err.stack,
+  //   statusCode: err.statusCode,
+  // });
+  res.status(err.statusCode).json({
     status: err.status,
-    message:err.stack,
-    statusCode: err.statusCode,
+    message: err.message,
+    stack: err.stack,
+    error: err,
   });
   // if (process.env.NODE_ENV === "dev") {
   //   sendErrorDev(err, res);

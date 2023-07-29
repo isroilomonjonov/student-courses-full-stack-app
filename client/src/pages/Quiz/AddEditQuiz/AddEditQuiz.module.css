@@ -1,0 +1,16 @@
+.form{
+    max-width: 700px;
+    min-width: 300px;
+    margin:0 auto;
+}
+.questionI{
+    max-width: 600px;
+    min-width:200px;
+    margin-left: 100px;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
