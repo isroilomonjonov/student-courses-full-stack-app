@@ -4,13 +4,32 @@ const QueryBuilder = require("../utils/QueryBuilder");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const Users = require("../models/User");
+const { Op } = require("sequelize");
 exports.getAllPayments = catchAsync(async (req, res, next) => {
+  const {port}=req.query;
+  delete req.query.port
   const queryBuilder = new QueryBuilder(req.query);
   queryBuilder.filter().paginate().sort();
   queryBuilder.queryOptions.include = [{ model: Courses }, { model: Users }];
+  // Get the current date
+const currentDate = new Date();
+
+// Get the first day of the month
+const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+// Get the last day of the month
+const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+// Format the dates as strings
+const formattedFirstDay = firstDayOfMonth.toLocaleDateString();
+const formattedLastDay = lastDayOfMonth.toLocaleDateString();
+
+// Output the results
+console.log("First day of the month:", formattedFirstDay);
+console.log("Last day of the month:", formattedLastDay);
   let allPayments = await Payment.findAndCountAll({
     ...queryBuilder.queryOptions,
-    where: { ...queryBuilder.queryOptions.where, creatorId: req.user.id },
+    where: { ...queryBuilder.queryOptions.where, creatorId: req.user.id,...port==="month"||port==="monthNon"?{createdAt:{[Op.between]:[formattedFirstDay,formattedLastDay]}}:{} },
   });
   let allPayments1 = await Payment.findAndCountAll({where:{creatorId: req.user.id}});
   let acc1 = 0;
@@ -23,7 +42,10 @@ exports.getAllPayments = catchAsync(async (req, res, next) => {
     accNow += allPayments.rows[i].price;
   }
   allPayments = queryBuilder.createPage(allPayments);
-
+  const madePayment=allPayments.content.map((p)=>p.userId)
+  const nonPayment= await Users.findAndCountAll({
+    where: { ...queryBuilder.queryOptions.where, creatorId: req.user.id,id:{[Op.notIn]:madePayment},role:"STUDENT",isVerified:true },
+  });
   res.json({
     status: "success",
     message: "",
@@ -31,7 +53,9 @@ exports.getAllPayments = catchAsync(async (req, res, next) => {
       allPayments,
       price: acc,
       allPrice: acc1,
-      accNow
+      accNow,
+      nonPayment,
+      port
     },
   });
 });

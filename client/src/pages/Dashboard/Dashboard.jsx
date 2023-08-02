@@ -5,6 +5,7 @@ import { ChartPie } from "../../components/Chart/ChartPie";
 import useHttp from "../../hooks/use-http";
 import { getStudentsStatistics } from "../../api/students-api";
 import { getAllCoursesStatistics } from "../../api/courses-api";
+
 const Dashboard = () => {
   const { send: getAllStudentsStatistics, data: value } = useHttp(
     getStudentsStatistics

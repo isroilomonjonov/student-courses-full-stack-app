@@ -12,6 +12,7 @@ import PaymentStatistics from "../../components/UI/PaymentStatistics/PaymentStat
 import { phoneNumber } from "../../utils/phoneNumber";
 
 const Payment = () => {
+  const [paymentDate, setPaymentDate] = useState("all");
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
   const size = searchParams.get("size") || 15;
@@ -22,8 +23,8 @@ const Payment = () => {
   const { send: getAllPaymentData, data: value } = useHttp(getAllPayments);
   const { register, handleSubmit } = useForm();
   useEffect(() => {
-    getAllPaymentData({ page, size, search });
-  }, [page, size, search]);
+    getAllPaymentData({ page, size, search, paymentDate });
+  }, [page, size, search, paymentDate]);
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate(
@@ -42,56 +43,64 @@ const Payment = () => {
       Header: "FIO",
       accessor: (s) => {
         return (
-          <p>
-            {s.user.firstName} {s.user.lastName}
-          </p>
+          <>
+          {paymentDate!=="monthNon"?  <p>
+              {s.user.firstName} {s.user.lastName}
+            </p>:<p>{s.firstName} {s.lastName}</p>}
+          </>
         );
       },
     },
     {
       id: "TelefonRaqam",
       Header: "Telefon Raqam",
-      accessor: (s)=>{
-        return phoneNumber(s.user.phoneNumber)
-      },
-    },
-    {
-      id: "KursNomi",
-      Header: "Kurs nomi",
-      accessor: "course.name",
-    },
-    {
-      Header: "To'lov",
       accessor: (s) => {
-        return <p>{s.price?.toLocaleString("Ru-Ru")} sum</p>;
+        return <>
+        {paymentDate!=="monthNon"? phoneNumber(s.user.phoneNumber):phoneNumber(s.phoneNumber)}
+        </>
       },
     },
-    {
-      id: "CreatedAt",
-      Header: "Yaratilgan vaqti",
-      accessor: (s) => {
-        return (
-          <p>
-            {new Date(s.createdAt).toLocaleString("uz-Uz", {
-              hour: "2-digit",
-              minute: "2-digit",
-              day: "2-digit",
-              year: "numeric",
-              month: "2-digit",
-            })}
-          </p>
-        );
-      },
-    },
-    {
-      id: "Amallar",
-      Header: "Amallar",
-      accessor: (payment) => (
-        <div key={payment.id}>
-          <Link to={`/payments/${payment.id}`}>📝</Link>
-        </div>
-      ),
-    },
+    ...(paymentDate !== "monthNon"
+      ? [
+          {
+            id: "KursNomi",
+            Header: "Kurs nomi",
+            accessor: "course.name",
+          },
+          {
+            Header: "To'lov",
+            accessor: (s) => {
+              return <p>{s.price?.toLocaleString("Ru-Ru")} sum</p>;
+            },
+          },
+          {
+            id: "CreatedAt",
+            Header: "Yaratilgan vaqti",
+            accessor: (s) => {
+              return (
+                <p>
+                  {new Date(s.createdAt).toLocaleString("uz-Uz", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    day: "2-digit",
+                    year: "numeric",
+                    month: "2-digit",
+                  })}
+                </p>
+              );
+            },
+          },
+          {
+            id: "Amallar",
+            Header: "Amallar",
+            accessor: (payment) => (
+              <div key={payment.id}>
+                <Link to={`/payments/${payment.id}`}>📝</Link>
+              </div>
+            ),
+          },
+        ]
+      : []),
   ];
   return (
     <Layout>
@@ -130,18 +139,60 @@ const Payment = () => {
             </button>
           </form>
         </div>
-        <div>
-          {value && <BasicTable columns={packageCols} data={value?.payments} />}
-          {value && value.payments && (
-            <Pagination
-              page={page}
-              size={size}
-              data={value}
-              colorLink={page}
-              path={"payments"}
-            />
-          )}
+        <div className={`${styles.div}`}>
+          <p className={`${styles.containerP}`}>
+            <span
+              onClick={() => setPaymentDate("all")}
+              className={`${styles.span} ${
+                paymentDate === "all" ? styles.spanActive : ""
+              }`}
+            >
+              Barcha ma'lumotlar
+            </span>
+            {"  "}
+
+            <span
+              onClick={() => setPaymentDate("month")}
+              className={`${styles.span} ${
+                paymentDate === "month" ? styles.spanActive : ""
+              }`}
+            >
+              Bu oy ma'lumotlari
+            </span>
+            {"  "}
+            <span
+              onClick={() => setPaymentDate("monthNon")}
+              className={`${styles.span} ${
+                paymentDate === "monthNon" ? styles.spanActive : ""
+              }`}
+            >
+              Bu oy to'lamaganlar
+            </span>
+          </p>
         </div>
+        {paymentDate !== "monthNon" ? (
+          <div>
+            {value && (
+              <BasicTable columns={packageCols} data={value?.payments} />
+            )}
+            {value && value.payments && (
+              <Pagination
+                page={page}
+                size={size}
+                data={value}
+                colorLink={page}
+                path={"payments"}
+              />
+            )}
+          </div>
+        ) : (
+          <>
+            {console.log(value.nonPaymentUser)}
+            {value && (
+              <BasicTable columns={packageCols} data={value?.nonPaymentUser} />
+            )}
+          </>
+        )}
       </div>
 
       <button

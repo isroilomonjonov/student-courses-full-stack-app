@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import axiosInstance from "../utils/axios-instance";
-export const getAllPayments = async ({ size, page, search, gte, lte }) => {
+export const getAllPayments = async ({ size, page, search, gte, lte,paymentDate }) => {
   try {
-    const path = `?size=${size}&page=${page}${
+    const path = `?size=${size}&page=${page}&port=${paymentDate}${
       search ? `&search=${search}` : ""
     }${gte ? `&createdAt[gte]=${gte}` : ""}${
       lte ? `&createdAt[lte]=${lte}` : ""
@@ -15,6 +15,7 @@ export const getAllPayments = async ({ size, page, search, gte, lte }) => {
       price: res.data.data.price,
       allPrice: res.data.data.allPrice,
       priceNow: res.data.data.accNow,
+      nonPaymentUser:res.data.data.nonPayment.rows
     };
   } catch (error) {
     toast.error(error.response.data.message);
