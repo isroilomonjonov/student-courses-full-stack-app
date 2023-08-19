@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 const useHttp = (reqFn, startWithLoading = false) => {
   const [loading, setLoading] = useState(false);
@@ -16,12 +17,12 @@ const useHttp = (reqFn, startWithLoading = false) => {
     setError(null);
     try {
       const data = await reqFn(reqData);
+      console.log(data);
       setData(data);
       if (data && data.message) {
         toast.success(data?.message);
       }
     } catch (error) {
-      console.log(error);
       setError(error);
       toast.error(error.response.data.message);
     }
